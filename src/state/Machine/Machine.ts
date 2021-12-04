@@ -1,6 +1,6 @@
 import { onCleanup, batch } from "solid-js";
 import { createStore, reconcile, Store } from "solid-js/store";
-import { EventObject, HistoryValue, interpret, StateMachine, StateSchema, StateValue } from "xstate";
+import { EventObject, HistoryValue, interpret, MachineOptions, StateMachine, StateSchema, StateValue } from "xstate";
 
 type UseMachineRes<
   Ctx extends Record<string, unknown> = {},
@@ -25,9 +25,10 @@ export function useMachine<
   Events extends EventObject = EventObject
 >(
   machine: StateMachine<Ctx, StateSchema, Events>, 
-  options = {}
+  options: Partial<MachineOptions<Ctx, Events>> = {},
+  interpretOpts = {}
 ): UseMachineRes<Ctx, Events> {
-  const service = interpret(machine, options);
+  const service = interpret(machine.withConfig(options), interpretOpts);
 
   const store = {
     ...service.initialState,
@@ -38,6 +39,7 @@ export function useMachine<
   const [state, setState] = createStore(store);
   
   service.onTransition((s) => {
+    console.log(s)
     // only focus on stuff that actually changes
     batch(() => {
       setState("value", s.value);

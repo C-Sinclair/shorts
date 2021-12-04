@@ -12,6 +12,7 @@
     "start": "vite",
     "dev": "vite",
     "test": "uvu -r solid-register src test.tsx?",
+    "uvu": "uvu -r solid-register src ",
     "build": "vite build",
     "serve": "vite preview"
   },

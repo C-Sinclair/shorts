@@ -1,16 +1,15 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 import { screen, render, cleanup } from 'solid-testing-library';
-import { App } from './App';
+import { Gallery } from './Gallery';
 import { isInDom } from '../../lib/test.utils';
 
 test.after.each(cleanup);
 
-test('App should render', async () => {
-  render(() => <App />)
-  const component = await screen.findByTestId('page-title')
+test('Gallery should render', async () => {
+  render(() => <Gallery />)
+  const component = await screen.findByTestId('gallery-root')
   assert.ok(isInDom(component))
-  assert.ok(component.textContent === 'Shorts')
 })
 
 test.run()
