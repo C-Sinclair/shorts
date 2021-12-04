@@ -12,4 +12,7 @@ test('Gallery should render', async () => {
   assert.ok(isInDom(component))
 })
 
+// TODO: test shorts are being rendered
+// this will require the ShortsProvider wrapping the tree
+
 test.run()

@@ -1,17 +1,31 @@
 import { ShortsMachine, Short } from "./Shorts.machine";
 import { useMachine } from "../Machine/Machine";
+import { createContext, useContext, PropsWithChildren } from 'solid-js'
 
 type ShortsRes = {
   shorts: Short[]
 }
 
-export function useShorts(): ShortsRes {
+const ShortsContext = createContext<ShortsRes>({
+  shorts: []
+})
+
+export function ShortsProvider(props: PropsWithChildren) {
   const [state] = useMachine(ShortsMachine, {
     services: { fetchShorts },
   })
-  return {
+  const value = {
     shorts: state.context?.shorts || []
   }
+  return (
+    <ShortsContext.Provider value={value}>
+      {props.children}
+    </ShortsContext.Provider>
+  )
+}
+
+export function useShorts(): ShortsRes {
+  return useContext(ShortsContext)
 }
 
 async function fetchShorts() {
