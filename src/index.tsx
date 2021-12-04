@@ -1,6 +1,6 @@
 import { render } from "solid-js/web";
 
-import "./index.scss";
+import "./assets/global.css";
 
 import { App } from "./components/App/App";
 

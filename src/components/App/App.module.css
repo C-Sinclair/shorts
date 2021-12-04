@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+.App > header {
+  background-color: var(--background-colour);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: var(--text-colour);
+}
+
+.App > footer {
+  min-height: 200px;
+}
+.App > footer .logo {
+  height: 40vmin;
+  pointer-events: none;
+}
