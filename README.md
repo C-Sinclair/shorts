@@ -5,3 +5,4 @@
 ## Built With 
 
 [Solid](https://solidjs.com) 
+[XState](https://xstate.js.org)

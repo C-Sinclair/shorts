@@ -3,7 +3,6 @@
 }
 
 .App > header {
-  background-color: var(--background-colour);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,10 +12,22 @@
   color: var(--text-colour);
 }
 
+.App > header h1 {
+  font-family: var(--font-title);
+}
+
 .App > footer {
   min-height: 200px;
-}
-.App > footer .logo {
   height: 40vmin;
-  pointer-events: none;
+}
+
+.App > footer ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App > footer li {
+  width: 12em;
+  margin: 0 2em;
 }
