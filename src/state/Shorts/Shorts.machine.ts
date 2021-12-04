@@ -16,11 +16,11 @@ export type Short = {
   tags: Tag[]
 }
 
-type ShortsMachineState = {
+export type ShortsMachineState = {
   shorts: Short[]
 }
 
-type ShortsMachineActions = 
+export type ShortsMachineActions = 
 | { type: 'FETCH' }
 
 /**
