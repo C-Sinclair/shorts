@@ -1,0 +1,12 @@
+CreateRole({
+  "name": "ShortAdminUDF",
+  "privileges": [{
+    "resource": Collection("Shorts"),
+    "actions": {
+      "read": true,
+      "create": true,
+      "update": true,
+      "delete": true
+    }
+  }]
+})

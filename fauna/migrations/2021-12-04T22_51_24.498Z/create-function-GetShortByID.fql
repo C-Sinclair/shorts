@@ -1,0 +1,22 @@
+CreateFunction({
+  "name": "GetShortByID",
+  "body": Query(Lambda("id", Let([{
+    "currentDocument": Get(Ref(Collection("Shorts"), Var("id")))
+  }, {
+    "currentPlays": Select(["data", "plays"], Var("currentDocument"))
+  }, {
+    "document": Update(Var("currentDocument"), {
+      "data": {
+        "plays": Add(Var("currentPlays"), 1)
+      }
+    })
+  }], {
+    "id": Select(["ref", "id"], Var("document")),
+    "title": Select(["data", "title"], Var("document")),
+    "description": Select(["data", "description"], Var("document")),
+    "url": Select(["data", "url"], Var("document")),
+    "tags": Select(["data", "tags"], Var("document")),
+    "plays": Select(["data", "plays"], Var("document"))
+  }))),
+  "role": Role("GetShortUDF")
+})

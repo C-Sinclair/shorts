@@ -1,0 +1,22 @@
+CreateFunction({
+  "name": "UpdateShort",
+  "body": Query(Lambda(["id", "title", "description", "url", "tags"], Let([{
+    "shortRef": Ref(Collection("Shorts"), Var("id"))
+  }, {
+    "newDocument": Update(Var("shortRef"), {
+      "data": {
+        "title": Select(["data", "title"], Var("title")),
+        "description": Select(["data", "description"], Var("description")),
+        "url": Select(["data", "url"], Var("url")),
+        "tags": Select(["data", "tags"], Var("tags"))
+      }
+    })
+  }], {
+    "id": Select(["ref", "id"], Var("newDocument")),
+    "title": Select(["data", "title"], Var("newDocument")),
+    "description": Select(["data", "description"], Var("newDocument")),
+    "url": Select(["data", "url"], Var("newDocument")),
+    "tags": Select(["data", "tags"], Var("newDocument"))
+  }))),
+  "role": Role("ShortAdminUDF")
+})

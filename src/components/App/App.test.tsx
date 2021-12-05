@@ -1,10 +1,10 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
-import { screen, render, cleanup } from 'solid-testing-library';
-import { App } from './App';
-import { isInDom } from '../../lib/test.utils';
+import { screen, render, cleanup } from 'solid-testing-library'
+import { App } from './App'
+import { isInDom } from '../../lib/test.utils'
 
-test.after.each(cleanup);
+test.after.each(cleanup)
 
 test('App should render', async () => {
   render(() => <App />)

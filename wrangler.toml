@@ -1,0 +1,14 @@
+name = "shorts-api"
+type = "javascript"
+
+account_id = "1c1f1e0e790dbe378722231e83953bd3"
+workers_dev = true
+route = ""
+zone_id = "e1b35f5e84cad9150ddd59df16d2847b"
+compatibility_date = "2021-11-02"
+
+[build]
+command = "npm run build:api"
+
+[build.upload]
+format = "service-worker"

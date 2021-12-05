@@ -1,0 +1,26 @@
+Update(Function("GetAllShorts"), {
+  "body": Query(Lambda([], Map(Paginate(Documents(Collection("Shorts"))), Lambda("short", Let([{
+    "document": Get(Var("short"))
+  }, {
+    "id": Select(["ref", "id"], Var("document"))
+  }, {
+    "title": Select(["data", "title"], Var("document"))
+  }, {
+    "description": Select(["data", "description"], Var("document"))
+  }, {
+    "url": Select(["data", "url"], Var("document"))
+  }, {
+    "tags": Select(["data", "tags"], Var("document"), [])
+  }, {
+    "plays": Select(["data", "plays"], Var("document"), 0)
+  }], {
+    "id": Var("id"),
+    "title": Var("title"),
+    "description": Var("description"),
+    "url": Var("url"),
+    "tags": Var("tags"),
+    "plays": Var("plays")
+  }))))),
+  "role": Role("GetShortUDF"),
+  "data": null
+})

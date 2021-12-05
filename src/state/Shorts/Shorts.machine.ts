@@ -1,4 +1,4 @@
-import { createMachine, assign } from "xstate";
+import { createMachine, assign } from 'xstate'
 
 /**
  * Used for filtering and categorizing
@@ -14,19 +14,23 @@ export type Short = {
   description: string
   /**  */
   tags: Tag[]
+  /**  */
+  plays: number
 }
 
 export type ShortsMachineState = {
   shorts: Short[]
 }
 
-export type ShortsMachineActions = 
-| { type: 'FETCH' }
+export type ShortsMachineActions = { type: 'FETCH' }
 
 /**
  * @service fetchShorts -- promise to fetch the shorts from the backend
  */
-export const ShortsMachine = createMachine<ShortsMachineState, ShortsMachineActions>({
+export const ShortsMachine = createMachine<
+  ShortsMachineState,
+  ShortsMachineActions
+>({
   id: 'shorts-machine',
   description: `Shorts fetcher from backend`,
   context: {
@@ -41,13 +45,13 @@ export const ShortsMachine = createMachine<ShortsMachineState, ShortsMachineActi
         onDone: {
           target: 'idle',
           actions: assign({
-            shorts: (_, res) => res.data.shorts || []
-          })
+            shorts: (_, res) => res.data.shorts || [],
+          }),
         },
         onError: {
-          target: 'error'
-        }
-      }
+          target: 'error',
+        },
+      },
     },
     error: {},
   },

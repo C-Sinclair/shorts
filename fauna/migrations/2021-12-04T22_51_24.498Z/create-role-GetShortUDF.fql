@@ -1,0 +1,9 @@
+CreateRole({
+  "name": "GetShortUDF",
+  "privileges": [{
+    "resource": Collection("Shorts"),
+    "actions": {
+      "read": true
+    }
+  }]
+})

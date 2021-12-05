@@ -1,0 +1,4 @@
+CreateIndex({
+  "name": "all_shorts",
+  "source": Collection("Shorts")
+})
