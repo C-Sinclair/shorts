@@ -2,7 +2,6 @@
 import { Suspense } from "solid-js";
 import { Links, Meta, Routes, Scripts } from "solid-start/root";
 import { ErrorBoundary } from "solid-start/error-boundary";
-import '../public/global.css'
 import "virtual:windi.css";
 
 export default function Root() {
@@ -13,6 +12,7 @@ export default function Root() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <link rel='stylesheet' href='/global.css' />
       </head>
       <body>
         <ErrorBoundary>
