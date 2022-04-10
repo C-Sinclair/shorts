@@ -1,4 +1,4 @@
-import { Short } from "@prisma/client"
+import type { Short } from "@prisma/client"
 
 type ShortItemProps = {
   short: Short

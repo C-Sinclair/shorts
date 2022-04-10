@@ -1,4 +1,4 @@
-import { User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { redirect } from 'solid-start/server'
 import { createCookieSessionStorage } from 'solid-start/session'

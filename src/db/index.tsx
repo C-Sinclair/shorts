@@ -1,4 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import P from "@prisma/client";
+
+const { PrismaClient } = P
 
 export const db = new PrismaClient();
 
