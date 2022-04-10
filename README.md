@@ -1,38 +1,32 @@
-# Shorts
+# SolidStart
 
-> Short videos on _programming_... mostly.
+Everything you need to build a Solid project, powered by [`solid-start`](https://github.com/ryansolid/solid-start/tree/master/packages/solid-start);
 
-## Built With
-
-[Solid](https://solidjs.com)
-[XState](https://xstate.js.org)
-[Fauna](https://fauna.com)
-
-## Development 
+## Creating a project
 
 ```bash
-# Run frontend Vite dev server
-pnpm dev
+# create a new project in the current directory
+npm init solid@next
+
+# create a new project in my-app
+npm init solid@next my-app
 ```
 
-The `pnpm build` command will bundle the frontend assets to a `dist` folder. 
+> Note: the `@next` is temporary
 
-## Database
+## Developing
 
-We use Fauna for the database.
-
-All data is accessed via functions in [this folder](./fauna/functions)
-
-When updating the data run
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
-pnpx fauna-schema-migrate generate
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-To prepare the migration files. Then
+## Building
 
-```bash
-pnpx fauna-schema-migrate apply
-```
+Solid apps are built with _adapters_, which optimise your project for deployment to different environments.
 
-To apply those changes
+By default, `npm run build` will generate a Node app that you can run with `node build`. To use a different adapter, add it to the `devDependencies` in `package.json` and specify in your `vite.config.js`.
