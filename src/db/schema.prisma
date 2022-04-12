@@ -7,27 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  /// hashed password string
-  password String
-  views    View[]
-}
-
 model Short {
   id          Int      @id @default(autoincrement())
   title       String
   description String
   url         String
   tags        String[]
-  views       View[]
-}
-
-model View {
-  id       Int   @id @default(autoincrement())
-  user     User? @relation(fields: [user_id], references: [id])
-  user_id  Int?
-  short    Short @relation(fields: [short_id], references: [id])
-  short_id Int
 }
