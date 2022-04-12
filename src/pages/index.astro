@@ -1,22 +1,14 @@
 ---
 import { db } from '~/db'
 import { ShortItem, Footer } from '~/components'
+import PageLayout from '~/layouts/PageLayout.astro'
 
 const shorts = await db.short.findMany() 
 ---
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Shorts</title>
-	</head>
-	<body>
-    <main class="w-full p-4 space-y-2">
-      <h1 class="font-bold text-xl">Shorts</h1>
-			{shorts.map(short => (
-				<ShortItem client:idle short={short} />
-			))}
-			<Footer />
-		</main>
-	</body>
-</html>
+<PageLayout>
+  <h1 class="font-bold text-xl">Shorts</h1>
+    {shorts.map(short => (
+        <ShortItem client:idle short={short} />
+    ))}
+  <Footer />
+</PageLayout>

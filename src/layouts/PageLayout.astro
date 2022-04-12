@@ -1,0 +1,22 @@
+---
+const { title } = Astro.props
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title || 'Shorts'}</title>
+  </head>
+  <body>
+    <main class="w-full p-4 space-y-2">
+      <slot />
+    </main>
+    <script 
+      async 
+      defer 
+      data-website-id="829db56d-2211-4279-9be2-90531cd5000f" 
+      src="https://umami-production-8826.up.railway.app/umami.js"
+    ></script>
+  </body>
+</html>
+
