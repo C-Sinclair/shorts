@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
+    "start": "node ./server.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "db:dev": "prisma migrate dev",
@@ -42,5 +42,8 @@
   },
   "engines": {
     "node": ">=14"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
   }
 }
