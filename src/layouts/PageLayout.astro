@@ -1,9 +1,12 @@
 ---
 import '../assets/global.css'
 import { Footer, Header } from '~/components'
+import { isLoggedIn } from '~/auth'
 import codeImg from '../assets/mitchell-luo-FWoq_ldWlNQ-unsplash.jpg'
 
 const { title } = Astro.props
+
+const authenticated = await isLoggedIn(Astro.request.headers)
 ---
 <html lang="en">
   <head>
@@ -18,7 +21,7 @@ const { title } = Astro.props
       <img alt='background code image' src={codeImg} class='fixed object-cover h-full w-full opacity-50' />
       <!-- <div class='bg-black/50 h-screen w-screen fixed' /> -->
     </div>
-    <Header />
+    <Header authenticated={authenticated} />
     <main class="w-full p-4 space-y-2 flex-grow">
       <slot />
     </main>
