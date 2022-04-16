@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "TAILWIND_MODE=watch astro dev",
-    "start": "node ./server.mjs",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "db:dev": "prisma migrate dev",
