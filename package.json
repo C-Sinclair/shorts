@@ -46,6 +46,7 @@
     "node": ">=14"
   },
   "dependencies": {
+    "@authorizerdev/authorizer-js": "^0.10.0",
     "express": "^4.17.3"
   }
 }

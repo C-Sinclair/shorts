@@ -1,0 +1,14 @@
+---
+import { auth } from '~/auth'
+import PageLayout from '~/layouts/PageLayout.astro'
+
+const url = new URL(Astro.request.url)
+const res = await auth.verifyEmail({ token: url.hash })
+if (res) {
+  Astro.redirect('/')
+}
+---
+
+<PageLayout>
+  <h1>Verification Error</h1>
+</PageLayout>

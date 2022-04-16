@@ -5,6 +5,7 @@ specifiers:
   '@astrojs/partytown': ^0.1.2
   '@astrojs/solid-js': ^0.1.1
   '@astrojs/tailwind': ^0.1.2
+  '@authorizerdev/authorizer-js': ^0.10.0
   '@playwright/test': 1.20.0
   '@prisma/client': ^3.9.0
   '@vitest/ui': ^0.2.7
@@ -25,6 +26,7 @@ specifiers:
   vitest: ^0.2.7
 
 dependencies:
+  '@authorizerdev/authorizer-js': 0.10.0
   express: 4.17.3
 
 devDependencies:
@@ -164,6 +166,15 @@ packages:
   /@astrojs/webapi/0.11.0:
     resolution: {integrity: sha512-hzltX2kPjAX0zEKymU7ceDLCqkZN0ztgucqAzyvM62TJdznv/HRniJz850qKcqAcoTqDXBH5j/5FCO0GXSQLbw==}
     dev: true
+
+  /@authorizerdev/authorizer-js/0.10.0:
+    resolution: {integrity: sha512-REM8FLD/Ej9gzA2zDGDAke6QFss33ubePlTDmLDmIYUuQmpHFlO5mCCS6nVsKkN7F/Bcwkmp+eUNQjkdGCaKLg==}
+    engines: {node: '>=10'}
+    dependencies:
+      node-fetch: 2.6.7
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /@babel/code-frame/7.16.7:
     resolution: {integrity: sha512-iAXqUn8IIeBTNd72xsFlgaXHkMBMt6y4HJp1tIaK465CWLT/fG1aqB7ykr95gHHmlBdGbFeWWfyB4NJJ0nmeIg==}
@@ -3756,6 +3767,18 @@ packages:
       tslib: 2.3.1
     dev: true
 
+  /node-fetch/2.6.7:
+    resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+    dependencies:
+      whatwg-url: 5.0.0
+    dev: false
+
   /node-releases/2.0.2:
     resolution: {integrity: sha512-XxYDdcQ6eKqp/YjI+tb2C5WM2LgjnZrfYg4vgQt49EK268b6gYCHsBLrK2qvJo4FmCtqmKezb0WZFK4fkrZNsg==}
     dev: true
@@ -5029,6 +5052,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /tr46/0.0.3:
+    resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
+    dev: false
+
   /trough/2.1.0:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: true
@@ -5416,6 +5443,17 @@ packages:
   /web-namespaces/2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
     dev: true
+
+  /webidl-conversions/3.0.1:
+    resolution: {integrity: sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=}
+    dev: false
+
+  /whatwg-url/5.0.0:
+    resolution: {integrity: sha1-lmRU6HZUYuN2RNNib2dCzotwll0=}
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
+    dev: false
 
   /which-boxed-primitive/1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

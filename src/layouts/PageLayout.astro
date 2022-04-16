@@ -13,9 +13,9 @@ const { title } = Astro.props
     <!-- TODO: move this script into Partytown -->
     <script async defer data-website-id="e7050b8c-eec7-46cc-ae22-1b360e03ddef" src="https://umami-production-8826.up.railway.app/umami.js"></script>
   </head>
-  <body class="flex flex-col min-h-screen">
-    <div class='fixed h-screen w-screen -z-20'>
-      <img alt='background code image' src={codeImg} class='fixed object-cover h-full' />
+  <body class="flex flex-col min-h-screen bg-black">
+    <div class='fixed min-h-screen min-w-screen -z-20'>
+      <img alt='background code image' src={codeImg} class='fixed object-cover h-full w-full opacity-50' />
       <!-- <div class='bg-black/50 h-screen w-screen fixed' /> -->
     </div>
     <Header />
