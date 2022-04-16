@@ -1,10 +1,10 @@
 import { defineConfig } from "astro/config";
-import node from "@astrojs/node";
 import solid from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
+import netlify from "@astrojs/netlify/functions";
 
 export default defineConfig({
-  adapter: node(),
+  adapter: netlify(),
   integrations: [solid(), tailwind(), partytown()],
 });

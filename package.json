@@ -20,7 +20,7 @@
     "schema": "src/db/schema.prisma"
   },
   "devDependencies": {
-    "@astrojs/node": "^0.1.1",
+    "@astrojs/netlify": "^0.2.3",
     "@astrojs/partytown": "^0.1.2",
     "@astrojs/solid-js": "^0.1.1",
     "@astrojs/tailwind": "^0.1.2",
