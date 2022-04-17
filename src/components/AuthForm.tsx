@@ -1,27 +1,35 @@
-import { createSignal } from "solid-js";
+import { createForm } from "@felte/solid";
+import { validator } from "@felte/validator-vest";
+import { For, Show } from "solid-js";
+import { create, enforce, test } from "vest";
 
 type AuthFormProps = {
   formType: "login" | "signup";
-  error?: string;
 };
 
+type AuthFields = {
+  email?: string;
+  password?: string;
+  confirm_password?: string;
+};
+
+declare module "solid-js" {
+  namespace JSX {
+    interface Directives {
+      form: true;
+    }
+  }
+}
+
 /**
- * Flexible form with progressive enhancement to handle JS or no JS
- * With no JS it will just fallback to the normal HTML form behaviour
+ * Flexible form which can handle either login or signup
  */
-export function AuthForm({ formType, ...props }: AuthFormProps) {
-  const [error, setError] = createSignal(props.error);
-
-  const url = `/${formType === "login" ? "login" : "signup"}`;
-
-  const onSubmit = async (e) => {
-    try {
+export function AuthForm({ formType }: AuthFormProps) {
+  const { form, errors, isValid } = createForm<AuthFields>({
+    extend: validator({ suite }),
+    async onSubmit(values) {
       console.log("submitting");
-      e.preventDefault();
-      const formData = new FormData(e.target as HTMLFormElement);
-      const email = formData.get("email");
-      const password = formData.get("password");
-      const confirm_password = formData.get("confirm_password");
+      const { email, password, confirm_password } = values;
       const res = await fetch(url, {
         method: "POST",
         body: JSON.stringify({
@@ -36,24 +44,29 @@ export function AuthForm({ formType, ...props }: AuthFormProps) {
       if (data.error) {
         throw new Error(data.error);
       }
-    } catch (e) {
-      console.log("form submit error", e);
-      setError(e.message);
-    }
-  };
+    },
+  });
+
+  const url = `/${formType === "login" ? "login" : "signup"}`;
 
   return (
     <form
       class="flex flex-col p-20 mx-auto max-w-md bg-black rounded-md"
-      onSubmit={onSubmit}
+      use:form
     >
       <label for="email" class="text-white">
         Email
       </label>
+      <Show when={errors().email?.length > 0}>
+        <For each={errors().email}>{(error: string) => <p>{error}</p>}</For>
+      </Show>
       <input name="email" type="email" id="email" />
       <label for="password" class="text-white">
         Password
       </label>
+      <Show when={errors().password?.length > 0}>
+        <For each={errors().password}>{(error: string) => <p>{error}</p>}</For>
+      </Show>
       <input name="password" type="password" id="password" />
       {formType === "signup" && (
         <>
@@ -65,12 +78,20 @@ export function AuthForm({ formType, ...props }: AuthFormProps) {
             type="password"
             id="confirm_password"
           />
+          <Show when={errors().confirm_password?.length > 0}>
+            <For each={errors().confirm_password}>
+              {(error: string) => <p>{error}</p>}
+            </For>
+          </Show>
         </>
       )}
-      <button type="submit" class="self-end mt-4 text-white">
+      <button
+        type="submit"
+        class="self-end mt-4 text-white"
+        disabled={!isValid()}
+      >
         {formType === "login" ? "Login" : "Signup"}
       </button>
-      {error() && <p class="font-bold text-red-900">{error()}</p>}
       <p class="text-white">
         Already have an account?{" "}
         <a
@@ -83,3 +104,15 @@ export function AuthForm({ formType, ...props }: AuthFormProps) {
     </form>
   );
 }
+
+const suite = create("form", (data: AuthFields) => {
+  test("email", "Email is required", () => {
+    enforce(data.email).isNotEmpty();
+  });
+  test("password", "Password is required", () => {
+    enforce(data.password).isNotEmpty();
+  });
+  test("confirm_password", "Should match password", () => {
+    enforce(data.confirm_password).equals(data.password);
+  });
+});
