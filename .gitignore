@@ -1,6 +1,9 @@
 # build output
-dist/
-.output/
+dist
+.solid
+.output
+.vercel
+.netlify
 
 # dependencies
 node_modules/
