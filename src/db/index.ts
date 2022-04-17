@@ -1,7 +1,6 @@
 import P from "@prisma/client";
+import { isServer } from "solid-js/web";
 
-const { PrismaClient } = P
+export const db = isServer ? new P.PrismaClient() : undefined;
 
-export const db = new PrismaClient();
-
-db.$connect();
+db?.$connect();

@@ -54,22 +54,30 @@ export function AuthForm({ formType }: AuthFormProps) {
       class="flex flex-col p-20 mx-auto max-w-md bg-black rounded-md"
       use:form
     >
-      <label for="email" class="text-white">
-        Email
-      </label>
-      <Show when={errors().email?.length > 0}>
-        <For each={errors().email}>{(error: string) => <p>{error}</p>}</For>
-      </Show>
-      <input name="email" type="email" id="email" />
-      <label for="password" class="text-white">
-        Password
-      </label>
-      <Show when={errors().password?.length > 0}>
-        <For each={errors().password}>{(error: string) => <p>{error}</p>}</For>
-      </Show>
-      <input name="password" type="password" id="password" />
+      <div class="mb-4 w-full">
+        <label for="email" class="text-white">
+          Email
+        </label>
+        <input name="email" type="email" id="email" class="w-full" />
+        <Show when={errors().email?.length > 0}>
+          <For each={errors().email}>
+            {(error: string) => <p class="text-red-700">{error}</p>}
+          </For>
+        </Show>
+      </div>
+      <div class="mb-4 w-full">
+        <label for="password" class="text-white">
+          Password
+        </label>
+        <Show when={errors().password?.length > 0}>
+          <For each={errors().password}>
+            {(error: string) => <p class="text-red-700">{error}</p>}
+          </For>
+        </Show>
+        <input name="password" type="password" id="password" class="w-full" />
+      </div>
       {formType === "signup" && (
-        <>
+        <div class="mb-4 w-full">
           <label for="confirm_password" class="text-white">
             Confirm Password
           </label>
@@ -77,13 +85,14 @@ export function AuthForm({ formType }: AuthFormProps) {
             name="confirm_password"
             type="password"
             id="confirm_password"
+            class="w-full"
           />
           <Show when={errors().confirm_password?.length > 0}>
             <For each={errors().confirm_password}>
-              {(error: string) => <p>{error}</p>}
+              {(error: string) => <p class="text-red-700">{error}</p>}
             </For>
           </Show>
-        </>
+        </div>
       )}
       <button
         type="submit"

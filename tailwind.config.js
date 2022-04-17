@@ -1,6 +1,4 @@
-import { defineConfig } from "windicss/helpers";
-
-export default defineConfig({
+module.exports = {
   theme: {
     fontFamily: {
       main: ["Manrope", "sans-serif"],
@@ -9,4 +7,4 @@ export default defineConfig({
     },
   },
   plugins: [],
-});
+};
