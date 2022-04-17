@@ -1,0 +1,8 @@
+name = "shorts"
+type = "javascript"
+[site]
+bucket = "./dist"
+entry-point = "./"
+[build]
+command = ""
+upload.format = "service-worker"
