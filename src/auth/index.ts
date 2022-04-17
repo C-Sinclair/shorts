@@ -1,11 +1,13 @@
-import { Authorizer } from "@authorizerdev/authorizer-js";
-import { AUTHORIZER_URL, CLIENT_ID, REDIRECT_URL } from "~/env";
+import { Authorizer } from '@authorizerdev/authorizer-js'
+import { AUTHORIZER_URL, CLIENT_ID, REDIRECT_URL } from '~/env'
+
+export type { AuthToken, User } from '@authorizerdev/authorizer-js'
 
 export const auth = new Authorizer({
   authorizerURL: AUTHORIZER_URL,
   redirectURL: REDIRECT_URL,
   clientID: CLIENT_ID,
-});
+})
 
 /**
  * Check if user is logged in from their request headers
@@ -16,25 +18,28 @@ export async function isLoggedIn(
   roles: string[] = [],
 ): Promise<boolean> {
   try {
-    const Authorization = headers.get("Authorization");
+    const Authorization = headers.get('Authorization')
     if (!Authorization) {
-      return false;
+      return false
     }
-    const res = await auth.getSession({ Authorization }, { roles });
-    return Boolean(res?.user);
+    const res = await auth.getSession({ Authorization }, { roles })
+    return Boolean(res?.user)
   } catch (e) {
-    console.error(e);
+    console.error('isLoggedIn error', e)
   }
-  return false;
+  return false
 }
 
 /**
  * Logout the current user, using their auth header
  */
 export async function logout(headers: Headers): Promise<void> {
-  const Authorization = headers.get("Authorization");
+  const Authorization = headers.get('Authorization')
   if (!Authorization) {
-    return;
+    return
   }
-  await auth.logout({ Authorization });
+  await auth.logout({ Authorization })
 }
+
+export * from './login'
+export * from './signup'

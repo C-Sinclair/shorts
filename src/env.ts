@@ -5,9 +5,3 @@ export const REDIRECT_URL =
   (process.env.AUTHORIZER_REDIRECT_URL as string);
 export const CLIENT_ID = (import.meta.env.AUTHORIZER_CLIENT_ID as string) ||
   (process.env.AUTHORIZER_CLIENT_ID as string);
-
-console.log({
-  AUTHORIZER_URL,
-  REDIRECT_URL,
-  CLIENT_ID,
-});

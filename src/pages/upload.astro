@@ -2,7 +2,7 @@
 import { isLoggedIn } from '~/auth'
 import PageLayout from '~/layouts/PageLayout.astro'
 
-if (!await isLoggedIn(Astro.request.headers, 'creator')) {
+if (!await isLoggedIn(Astro.request.headers, ['creator'])) {
   Astro.redirect('/')
 }
 ---
