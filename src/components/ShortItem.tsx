@@ -1,4 +1,7 @@
-import type { Short } from "@prisma/client";
+export type Short = {
+  title: string;
+  description: string;
+};
 
 type ShortItemProps = {
   short: Short;

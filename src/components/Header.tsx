@@ -1,11 +1,12 @@
 import { createResource, Suspense } from "solid-js";
+import { Link } from "solid-app-router";
 
 export function Header() {
   return (
     <header class="flex justify-between p-4 backdrop-hue-rotate-180 border-slate-900/10 backdrop-filter dark:border-slate-300/10">
-      <a href="/">
+      <Link href="/">
         <h1 class="text-4xl font-bold text-yellow-400 font-title">Shorts</h1>
-      </a>
+      </Link>
       <Suspense fallback={<div />}>
         <AuthActions />
       </Suspense>
@@ -23,22 +24,22 @@ function AuthActions() {
             {auth().profileImage && (
               <img src={auth().profileImage} alt="user profile image" />
             )}
-            <a href="/logout" class="text-yellow-400 hover:text-yellow-200">
+            <Link href="/logout" class="text-yellow-400 hover:text-yellow-200">
               Logout
-            </a>
+            </Link>
           </>
         )
         : (
           <>
-            <a href="/login" class="text-yellow-400 hover:text-yellow-200">
+            <Link href="/login" class="text-yellow-400 hover:text-yellow-200">
               Login
-            </a>
-            <a
+            </Link>
+            <Link
               href="/signup"
               class="ml-4 text-yellow-400 hover:text-yellow-200"
             >
               Signup
-            </a>
+            </Link>
           </>
         )}
     </div>

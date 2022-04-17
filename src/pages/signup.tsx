@@ -1,4 +1,4 @@
-import { AuthForm } from '~/components'
+import { AuthForm } from "../components";
 
 export default function Signup() {
   return (
@@ -6,5 +6,5 @@ export default function Signup() {
       <h1>Signup</h1>
       <AuthForm formType="signup" />
     </>
-  )
+  );
 }
