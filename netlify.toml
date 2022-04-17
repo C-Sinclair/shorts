@@ -2,7 +2,7 @@
   publish = "dist/"
 
 [functions]
-  directory = "dist/functions"
+  directory = ".solid/server"
 
 [[redirects]]
   from = "/*"

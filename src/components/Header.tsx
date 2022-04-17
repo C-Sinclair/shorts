@@ -52,6 +52,7 @@ type AuthStatusResponse = {
 
 async function checkAuthStatus(): Promise<AuthStatusResponse> {
   try {
+    return { isAuthenticated: false };
     const res = await fetch(`/profile`, {
       method: "POST",
     });
