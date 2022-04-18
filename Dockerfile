@@ -7,6 +7,7 @@ WORKDIR /app
 
 COPY package.json .
 COPY pnpm-lock.yaml .
+COPY Makefile .
 
 RUN make install-ui
 
