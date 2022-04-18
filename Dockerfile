@@ -1,4 +1,6 @@
-FROM ianwalter/pnpm:v1.4.0 AS ui-builder
+FROM node:16-alpine AS ui-builder
+
+RUN npm i -g pnpm
 
 RUN mkdir -p /app
 WORKDIR /app
