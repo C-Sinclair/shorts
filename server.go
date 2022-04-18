@@ -31,6 +31,13 @@ func setupRouter() *gin.Engine {
 	// TODO: upload short (when admin)
 	// TODO: check authorizer for if authenticated
 
+	r.NoRoute(func(c *gin.Context) {
+		method := c.Request.Method
+		if method == "GET" {
+			c.File("./dist/index.html")
+		}
+	})
+
 	return r
 }
 
