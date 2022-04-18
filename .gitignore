@@ -5,6 +5,8 @@ dist
 .vercel
 .netlify
 
+shorts-server
+
 # dependencies
 node_modules/
 
