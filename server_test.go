@@ -27,7 +27,7 @@ func TestShortsRoute(t *testing.T) {
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Equal(t, "{\"shorts\":[]}", w.Body.String())
+	assert.Contains(t, w.Body.String(), "{\"shorts\":[{\"id\":1")
 }
 
 // TODO: implement static test
