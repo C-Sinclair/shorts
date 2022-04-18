@@ -12,9 +12,7 @@ COPY . .
 
 RUN make build-ui
 
-ARG GO_VERSION=1.14
-
-FROM golang:${GO_VERSION}-alpine AS api-builder
+FROM golang:1.18-alpine AS api-builder
 
 RUN apk update && apk add alpine-sdk git && rm -rf /var/cache/apk/*
 
