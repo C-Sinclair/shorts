@@ -31,7 +31,7 @@ RUN make install-api
 
 COPY . .
 COPY --from=ui-builder /app dist
-RUN make build 
+RUN make build-api
 
 FROM alpine:latest
 
