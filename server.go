@@ -1,7 +1,6 @@
 package main
 
 import (
-	"container/list"
 	"fmt"
 	"log"
 	"net/http"
@@ -21,11 +20,17 @@ func setupRouter() *gin.Engine {
 	})
 
 	r.GET("/api/shorts", func(c *gin.Context) {
-		// TODO: get shorts from Postgres
-		shorts := list.New()
-		c.JSON(http.StatusOK, gin.H{
-			"shorts": shorts,
-		})
+		shorts, err := getAllShorts()
+		if err != nil {
+			log.Fatal(err)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err,
+			})
+		} else {
+			c.JSON(http.StatusOK, gin.H{
+				"shorts": shorts,
+			})
+		}
 	})
 
 	// TODO: upload short (when admin)
