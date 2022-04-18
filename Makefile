@@ -7,6 +7,9 @@ install-ui:
 build-api:
 	go build -o shorts-server 
 
+build-ui:
+	pnpm run build
+
 run-api: build-api
 	./shorts-server
 
