@@ -1,10 +1,16 @@
-build:
+install-api:
+	go mod download
+
+install-ui:
+	pnpm install
+
+build-api:
 	go build -o shorts-server 
 
-run: build
+run-api: build-api
 	./shorts-server
 
 # watch and rebuild server on go file change
-watch:
+watch-api:
 	ulimit -n 1000 
-	reflex -s -r '\.go$$' make run
+	reflex -s -r '\.go$$' make run-api
