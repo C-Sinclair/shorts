@@ -30,7 +30,7 @@ COPY go.sum .
 RUN make install-api
 
 COPY . .
-COPY --from=ui-builder /app dist
+COPY --from=ui-builder /app/dist dist
 RUN make build-api
 
 FROM alpine:latest
