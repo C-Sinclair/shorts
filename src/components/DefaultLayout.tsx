@@ -13,7 +13,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="fixed min-h-screen min-w-screen">
+      <div className="fixed min-h-screen min-w-screen -z-10">
         <img
           alt="background code image"
           src="/mitchell-luo-FWoq_ldWlNQ-unsplash.jpg"
