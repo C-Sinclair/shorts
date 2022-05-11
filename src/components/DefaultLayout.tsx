@@ -3,7 +3,9 @@ import { ReactNode } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Header } from "./Header";
 
-type DefaultLayoutProps = { children: ReactNode };
+type DefaultLayoutProps = {
+  children: ReactNode;
+};
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
