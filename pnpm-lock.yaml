@@ -30,11 +30,11 @@ specifiers:
   react: ^18.0.0
   react-dom: ^18.0.0
   react-query: ^3.27.0
+  react-zorm: ^0.3.1
   start-server-and-test: ^1.12.0
   superjson: ^1.7.4
   tailwindcss: ^3.0.24
   typescript: ^4.6.3
-  vest: ^4.3.2
   vite-plugin-windicss: ^1.8.4
   vitest: ^0.7.11
   windicss: ^3.5.1
@@ -53,9 +53,9 @@ dependencies:
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-query: 3.38.1_react-dom@18.1.0+react@18.1.0
+  react-zorm: 0.3.1
   start-server-and-test: 1.14.0
   superjson: 1.9.1
-  vest: 4.3.2
   zod: 3.14.4
 
 devDependencies:
@@ -1732,10 +1732,6 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
-
-  /context/2.0.4:
-    resolution: {integrity: sha512-krHy3Ym4lOpYvvYqLWaGvvlcdHKg8nR3oB8GNmd4PBki6KfUuRZMF8DkYLfNif81ZL+SguwZaRydbjzckvH1zQ==}
-    dev: false
 
   /convert-source-map/1.8.0:
     resolution: {integrity: sha512-+OQdjP49zViI/6i7nIJpA8rAl4sV/JdPfU9nZs3VqOwGIgizICvuN2ru6fMd+4llL0tar18UYJXfZ/TWtmhUjA==}
@@ -3501,12 +3497,6 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /n4s/4.1.5:
-    resolution: {integrity: sha512-BQV1vzBMJQz9+Y9XuHJcCdH5dbitDUQDuB0xv9bwh8CdsfGITNflyQLzOMAPifUfdtsgCJ4NxBSoPPPcjNchAg==}
-    dependencies:
-      context: 2.0.4
-    dev: false
-
   /nano-time/1.0.0:
     resolution: {integrity: sha1-sFVPaa2J4i0JB/ehKwmTpdlhN+8=}
     dependencies:
@@ -4070,6 +4060,10 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.1.0
+    dev: false
+
+  /react-zorm/0.3.1:
+    resolution: {integrity: sha512-K5HfikJi2M2KuchAUj9Rq1KVn//tMfsAg4fUpNFDLDBG+byjKQU0SaaLmS8ndkUhdBiV3c7LlnBqQtYtEEw77A==}
     dev: false
 
   /react/18.1.0:
@@ -4664,13 +4658,6 @@ packages:
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
-
-  /vest/4.3.2:
-    resolution: {integrity: sha512-95vPtU9RBn9+IOvJx2Wjhpcv2L0/EwGzc1hkdnSW6tGMZrXoNCXYcEKzIhXso0k2eZFyv3gGINczFzUDEWVMUQ==}
-    dependencies:
-      context: 2.0.4
-      n4s: 4.1.5
-    dev: false
 
   /vite-plugin-windicss/1.8.4:
     resolution: {integrity: sha512-LSZAO8BZn3x406GRbYX5t5ONXXJVdqiQtN1qrznLA/Dy5/NzZVhfcrL6N1qEYYO7HsCDT4pLAjTzObvDnM9Y8A==}

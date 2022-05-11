@@ -1,14 +1,9 @@
-/**
- * This file contains the root router of your tRPC-backend
- */
 import { createRouter } from "../createRouter";
 import superjson from "superjson";
 import { shortRouter } from "./short";
+import { userRouter } from "./user";
 
 /**
- * Create your application's root router
- * If you want to use SSG, you need export this
- * @link https://trpc.io/docs/ssg
  * @link https://trpc.io/docs/router
  */
 export const appRouter = createRouter()
@@ -25,9 +20,7 @@ export const appRouter = createRouter()
       return "yay!";
     },
   })
-  /**
-   * Merge `shortRouter` under `post.`
-   */
+  .merge("user.", userRouter)
   .merge("short.", shortRouter);
 
 export type AppRouter = typeof appRouter;

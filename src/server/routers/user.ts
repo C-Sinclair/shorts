@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
-import { z } from "zod";
+import { loginSchema } from "~/pages/login";
+import { signupSchema } from "~/pages/signup";
 import { createRouter } from "~/server/createRouter";
 
 export const userRouter = createRouter()
@@ -12,10 +13,7 @@ export const userRouter = createRouter()
     },
   })
   .mutation("login", {
-    input: z.object({
-      email: z.string().email(),
-      password: z.string(),
-    }),
+    input: loginSchema,
     async resolve({ input, ctx: { auth } }) {
       const { email, password } = input;
       const authToken = await auth.login({ email, password });
@@ -36,22 +34,13 @@ export const userRouter = createRouter()
     },
   })
   .mutation("register", {
-    input: z
-      .object({
-        email: z.string().email(),
-        password: z.string(),
-        confirmPassword: z.string(),
-      })
-      .refine((data) => data.password === data.confirmPassword, {
-        message: "Passwords don't match",
-        path: ["confirmPassword"],
-      }),
+    input: signupSchema,
     async resolve({ input, ctx: { auth } }) {
-      const { email, password, confirmPassword } = input;
+      const { email, password, confirm_password } = input;
       const authToken = await auth.signup({
         email,
         password,
-        confirm_password: confirmPassword,
+        confirm_password,
       });
       if (!authToken) {
         throw new TRPCError({
