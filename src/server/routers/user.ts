@@ -9,6 +9,7 @@ export const userRouter = createRouter()
    */
   .query("current", {
     async resolve({ ctx }) {
+      console.log("CURRENT");
       return ctx.session?.user;
     },
   })

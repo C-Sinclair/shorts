@@ -11,6 +11,7 @@ import { AppRouter } from "~/server/routers/_app";
 import { SSRContext } from "~/utils/trpc";
 
 import "~/styles/global.css";
+import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -46,7 +47,14 @@ export default withTRPC<AppRouter>({
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
      */
+    const token = typeof window !== "undefined" &&
+      window.localStorage?.getItem(LOCAL_STORAGE_ACCESS_KEY);
+    const Authorization = token ? `Bearer ${token}` : undefined;
+
     return {
+      headers: {
+        Authorization,
+      },
       /**
        * @link https://trpc.io/docs/links
        */
@@ -74,7 +82,7 @@ export default withTRPC<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    */
-  ssr: true,
+  ssr: false,
   /**
    * Set headers or status code when doing SSR
    */
