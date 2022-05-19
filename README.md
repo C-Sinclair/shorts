@@ -25,3 +25,11 @@ I know, pretty boring. But boring and functional beats interesting/complex/flake
 The slight difference here is that I aim to keep React as solely the view layer. Basically a JSX wrapper for displaying data and funneling user interaction into actions.
 
 The controversial aim is to never use a `useState` or `useEffect` directly. `useEffect` in particular is the source of 100% (statistically true most of the time) of the bugs in an application. Keeping the usage of these 2 hooks to an absolute minimum sounds like a strange choice, but I see this UI as being simple enough to be able to be mostly server driven.
+
+### The Context Question
+
+Another annoying React scented issue is Context. Very useful in normal React apps to provide the plumbing of state and between components, but damn is there a lot of boilerplate to get this working!
+
+In this app to avoid that boilerplate, I'll use Jotai. In Jotai, you can use atoms which can be shared between components in a similar way.
+
+The only drawback is the power of localising Context state around specific components, but really, how often is that needed?!

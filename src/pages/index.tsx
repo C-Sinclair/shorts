@@ -7,7 +7,7 @@ export default function Home() {
     <ul className="flex flex-wrap px-8">
       {data?.map((short) => (
         <li>
-          <ShortItem short={short} />
+          <ShortItem {...short} />
         </li>
       ))}
     </ul>

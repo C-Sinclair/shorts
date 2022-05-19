@@ -14,6 +14,7 @@ const defaultShortSelect = Prisma.validator<Prisma.ShortSelect>()({
   description: true,
   createdAt: true,
   updatedAt: true,
+  playbackId: true,
 });
 
 export const shortRouter = createRouter()
@@ -65,6 +66,8 @@ export const shortRouter = createRouter()
           id: z.string().uuid().optional(),
           title: z.string().min(1).max(32),
           description: z.string().min(1).max(256),
+          path: z.string().min(3),
+          playbackId: z.string(),
         }),
         async resolve({ input, ctx: { prisma } }) {
           const short = await prisma.short.create({
@@ -80,6 +83,8 @@ export const shortRouter = createRouter()
           data: z.object({
             title: z.string().min(1).max(32).optional(),
             description: z.string().min(1).max(256).optional(),
+            path: z.string().min(3).optional(),
+            playbackId: z.string().optional(),
           }),
         }),
         async resolve({ input, ctx }) {
