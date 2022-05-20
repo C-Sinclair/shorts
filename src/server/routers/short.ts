@@ -15,6 +15,7 @@ const defaultShortSelect = Prisma.validator<Prisma.ShortSelect>()({
   createdAt: true,
   updatedAt: true,
   playbackId: true,
+  path: true,
 });
 
 export const shortRouter = createRouter()
