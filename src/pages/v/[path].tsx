@@ -23,6 +23,12 @@ export const getStaticProps: GetStaticProps<VideoPageProps> = async (ctx) => {
   }
   const short = await prisma.short.findFirst({
     where: { path },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      playbackId: true,
+    },
   });
   if (!short) {
     return {
@@ -40,7 +46,7 @@ export const getStaticProps: GetStaticProps<VideoPageProps> = async (ctx) => {
 };
 
 interface VideoPageProps {
-  short: Short;
+  short: Pick<Short, "id" | "title" | "description" | "playbackId">;
 }
 
 export default function VideoPage({ short }: VideoPageProps) {
