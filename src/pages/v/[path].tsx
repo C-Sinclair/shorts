@@ -4,7 +4,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const shorts = await prisma.short.findMany();
-  const paths = shorts.map((s) => s.path);
+  const paths = shorts.map((s) => `/v/${s.path}`);
   return {
     paths,
     fallback: "blocking",
