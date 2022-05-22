@@ -28,6 +28,7 @@ specifiers:
   next: 12.1.4
   playwright: ^1.19.1
   postcss: ^8.4.13
+  prettier: ^2.6.2
   prisma: ^3.7.0
   react: ^18.0.0
   react-dom: ^18.0.0
@@ -74,12 +75,13 @@ devDependencies:
   eslint: 7.32.0
   eslint-config-next: 12.1.6_ovtt36qzg3hao66uohgutyvrm4
   eslint-config-prettier: 8.5.0_eslint@7.32.0
-  eslint-plugin-prettier: 4.0.0_ycfaavsrvumh5dpcpdveopgtme
+  eslint-plugin-prettier: 4.0.0_evcial7aw3q6fcauxv2c7fxuoe
   eslint-plugin-react: 7.29.4_eslint@7.32.0
   eslint-plugin-react-hooks: 4.5.0_eslint@7.32.0
   jsdom: 19.0.0
   playwright: 1.21.1
   postcss: 8.4.13
+  prettier: 2.6.2
   prisma: 3.13.0
   tailwindcss: 3.0.24_ts-node@10.7.0
   ts-node: 10.7.0_c6ucwwwirjo6ockovr3lj3o2cm
@@ -2538,7 +2540,7 @@ packages:
       minimatch: 3.1.2
     dev: true
 
-  /eslint-plugin-prettier/4.0.0_ycfaavsrvumh5dpcpdveopgtme:
+  /eslint-plugin-prettier/4.0.0_evcial7aw3q6fcauxv2c7fxuoe:
     resolution: {integrity: sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==}
     engines: {node: '>=6.0.0'}
     peerDependencies:
@@ -2551,6 +2553,7 @@ packages:
     dependencies:
       eslint: 7.32.0
       eslint-config-prettier: 8.5.0_eslint@7.32.0
+      prettier: 2.6.2
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -4158,6 +4161,12 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       fast-diff: 1.2.0
+    dev: true
+
+  /prettier/2.6.2:
+    resolution: {integrity: sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-format/27.5.1:

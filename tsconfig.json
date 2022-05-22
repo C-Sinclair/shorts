@@ -8,6 +8,7 @@
     "strict": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
     "noEmit": true,
     "esModuleInterop": true,
     "noUncheckedIndexedAccess": true,
