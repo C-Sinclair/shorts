@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { uploadSchema } from "~/pages/upload";
 import { createRouter } from "~/server/createRouter";
 
 /**
@@ -63,13 +64,7 @@ export const shortRouter = createRouter()
         return next();
       })
       .mutation("add", {
-        input: z.object({
-          id: z.string().uuid().optional(),
-          title: z.string().min(1).max(32),
-          description: z.string().min(1).max(256),
-          path: z.string().min(3),
-          playbackId: z.string(),
-        }),
+        input: uploadSchema,
         async resolve({ input, ctx: { prisma } }) {
           const short = await prisma.short.create({
             data: input,

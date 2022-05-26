@@ -60,7 +60,7 @@ export default function Login() {
           className="self-end mt-4 text-white"
           disabled={t.isLoading || zo.validation?.success === true}
         >
-          {zo.validation?.success ? "Success" : "Login"}
+          Login
         </button>
         <p className="text-white">
           Already have an account?{" "}
