@@ -1,6 +1,7 @@
 import { Short } from "@prisma/client";
 import { prisma } from "~/server/prisma";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { VideoPlayer } from "~/components/VideoPlayer";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const shorts = await prisma.short.findMany();
@@ -50,5 +51,11 @@ interface VideoPageProps {
 }
 
 export default function VideoPage({ short }: VideoPageProps) {
-  return <h1>{JSON.stringify(short, null, 2)}</h1>;
+  return (
+    <article className="group text-white">
+      <VideoPlayer playbackId={short.playbackId} />
+      <h1 className="text-5xl">{short.title}</h1>
+      <p className="mt-2">{short.description}</p>
+    </article>
+  );
 }

@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import { KeyboardEvent, MouseEvent, useRef } from "react";
+import { useRouter } from "next/router";
+import { KeyboardEvent, MouseEvent } from "react";
 import { useFocusedShort } from "~/hooks/focused-short";
 
 interface ShortItemProps {
@@ -20,6 +21,8 @@ export function ShortItem({
   playbackId,
   path,
 }: ShortItemProps) {
+  const router = useRouter();
+
   const { focusedShort, setFocusedShortId } = useFocusedShort();
   const isFocused = focusedShort?.id === id;
 
@@ -28,15 +31,7 @@ export function ShortItem({
    */
   const select = () => {
     setFocusedShortId(id);
-    history.pushState(null, "", `/v/${path}`);
-  };
-
-  /**
-   * Dismisses the focused short
-   */
-  const dismiss = () => {
-    setFocusedShortId(null);
-    history.pushState(null, "", `/`);
+    router.push(`/v/${path}`);
   };
 
   const onClick = (e: MouseEvent) => {
@@ -48,11 +43,6 @@ export function ShortItem({
     if (e.key === "Enter") {
       select();
     }
-  };
-
-  const onClickOutside = (e: MouseEvent) => {
-    e.preventDefault();
-    dismiss();
   };
 
   return (

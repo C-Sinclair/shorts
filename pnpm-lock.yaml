@@ -23,6 +23,7 @@ specifiers:
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-react: ^7.25.1
   eslint-plugin-react-hooks: ^4.2.0
+  hls.js: ^1.1.5
   jotai: ^1.6.7
   jsdom: ^19.0.0
   next: 12.1.4
@@ -54,6 +55,7 @@ dependencies:
   '@trpc/react': 9.23.2_ky4wwmguu27faoy7mfs6ebkqtq
   '@trpc/server': 9.23.2
   clsx: 1.1.1
+  hls.js: 1.1.5
   jotai: 1.6.7_oijmhaj55yqutt7lhnpbzluyva
   next: 12.1.4_ef5jwxihqo6n7gxfmzogljlgcm
   react: 18.1.0
@@ -3041,6 +3043,10 @@ packages:
     dependencies:
       function-bind: 1.1.1
     dev: true
+
+  /hls.js/1.1.5:
+    resolution: {integrity: sha512-mQX5TSNtJEzGo5HPpvcQgCu+BWoKDQM6YYtg/KbgWkmVAcqOCvSTi0SuqG2ZJLXxIzdnFcKU2z7Mrw/YQWhPOA==}
+    dev: false
 
   /hoist-non-react-statics/3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
