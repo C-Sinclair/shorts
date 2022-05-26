@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@authorizerdev/authorizer-js": "^0.10.0",
-    "@authorizerdev/authorizer-react": "^0.19.0",
+    "@authorizerdev/authorizer-react": "^0.22.0",
     "@mux/mux-node": "^5.0.0-rc.5",
     "@prisma/client": "^3.0.1",
     "@trpc/client": "^9.23.2",
