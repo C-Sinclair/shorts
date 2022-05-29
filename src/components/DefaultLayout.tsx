@@ -13,6 +13,12 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
       <Head>
         <title>Shorts</title>
         <link rel="icon" href="/favicon.ico" />
+        <script
+          async
+          defer
+          data-website-id="e7050b8c-eec7-46cc-ae22-1b360e03ddef"
+          src="https://umami.sinclair.software/umami.js"
+        />
       </Head>
 
       <div className="fixed min-h-screen min-w-screen -z-10">
