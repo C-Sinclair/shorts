@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, ReactionType } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { uploadSchema } from "~/pages/upload";
@@ -37,7 +37,7 @@ export const shortRouter = createRouter()
     input: z.object({
       id: z.string(),
     }),
-    async resolve({ input, ctx: { prisma } }) {
+    async resolve({ input, ctx: { prisma, session } }) {
       const { id } = input;
       const short = await prisma.short.findUnique({
         where: { id },
@@ -49,7 +49,35 @@ export const shortRouter = createRouter()
           message: `No short with id '${id}'`,
         });
       }
+      // record short being viewed
+      await prisma.view.create({
+        data: {
+          short: { connect: { id } },
+          userId: session?.user?.id,
+        },
+      });
       return short;
+    },
+  })
+  .mutation("react", {
+    input: z.object({
+      shortId: z.string(),
+      reaction: z.enum([
+        ReactionType.LIKE,
+        ReactionType.DISLIKE,
+        ReactionType.LOVE,
+        ReactionType.UNICORN,
+        ReactionType.COOL,
+      ]),
+    }),
+    async resolve({ input, ctx: { prisma, session } }) {
+      await prisma.reaction.create({
+        data: {
+          short: { connect: { id: input.shortId } },
+          userId: session?.user?.id,
+          type: input.reaction,
+        },
+      });
     },
   })
   .merge(

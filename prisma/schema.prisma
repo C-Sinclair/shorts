@@ -24,4 +24,33 @@ model Short {
   previewGifStartTime Int?
   createdAt           DateTime @default(now())
   updatedAt           DateTime @default(now()) @updatedAt
+  views               View[]
+  reactions           Reaction[]
+}
+
+model View {
+  id        String   @id @default(uuid())
+  short     Short    @relation(fields: [shortId], references: [id])
+  shortId   String
+  /// The authorizer id of the user
+  userId    String?
+  timestamp DateTime @default(now())
+}
+
+enum ReactionType {
+  LIKE
+  DISLIKE
+  LOVE
+  UNICORN
+  COOL
+}
+
+model Reaction {
+  id        String   @id @default(uuid())
+  type      ReactionType
+  short     Short    @relation(fields: [shortId], references: [id])
+  shortId   String
+  /// The authorizer id of the user
+  userId    String?
+  timestamp DateTime @default(now())
 }
