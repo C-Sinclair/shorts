@@ -2,6 +2,8 @@ import { Short } from "@prisma/client";
 import { prisma } from "~/server/prisma";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { VideoPlayer } from "~/components/VideoPlayer";
+import { trpc } from "~/utils/trpc";
+import { Suspense } from "react";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const shorts = await prisma.short.findMany();
@@ -56,6 +58,24 @@ export default function VideoPage({ short }: VideoPageProps) {
       <VideoPlayer playbackId={short.playbackId} />
       <h1 className="text-5xl">{short.title}</h1>
       <p className="mt-2">{short.description}</p>
+      <Suspense fallback={<div />}>
+        <ViewCount id={short.id} />
+      </Suspense>
     </article>
   );
+}
+
+interface ViewCountProps {
+  id: string;
+}
+
+function ViewCount({ id }: ViewCountProps) {
+  const { data } = trpc.useQuery(["short.byId", { id }], {
+    refetchOnMount: false,
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+  });
+  return <p>{data?.views} views</p>;
 }

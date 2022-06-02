@@ -17,6 +17,12 @@ const defaultShortSelect = Prisma.validator<Prisma.ShortSelect>()({
   updatedAt: true,
   playbackId: true,
   path: true,
+  // grab only the View's id by default
+  views: {
+    select: {
+      id: true,
+    },
+  },
 });
 
 export const shortRouter = createRouter()
@@ -56,7 +62,24 @@ export const shortRouter = createRouter()
           userId: session?.user?.id,
         },
       });
-      return short;
+      const views = short.views.length + 1;
+      return {
+        ...short,
+        views,
+      };
+    },
+  })
+  .mutation("viewed", {
+    input: z.object({
+      shortId: z.string(),
+    }),
+    async resolve({ input, ctx: { prisma, session } }) {
+      await prisma.view.create({
+        data: {
+          short: { connect: { id: input.shortId } },
+          userId: session?.user?.id,
+        },
+      });
     },
   })
   .mutation("react", {
