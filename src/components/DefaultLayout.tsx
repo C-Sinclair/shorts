@@ -12,7 +12,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
     <>
       <Head>
         <title>Shorts</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/shorts-fav.png" />
         <script
           async
           defer
