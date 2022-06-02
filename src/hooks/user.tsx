@@ -5,25 +5,29 @@ type UseUser =
   | {
     isLoggedIn: false;
     user: null;
+    refetch: () => void;
   }
   | {
     /**
-       * The currently logged in user
-       */
+     * The currently logged in user
+     */
     user: User;
     isLoggedIn: true;
+    refetch: () => void;
   };
 
 export function useUser(): UseUser {
-  const { data } = trpc.useQuery(["user.current"], { ssr: false });
+  const { data, refetch } = trpc.useQuery(["user.current"], { ssr: false });
   if (data) {
     return {
       isLoggedIn: true,
       user: data,
+      refetch,
     };
   }
   return {
     isLoggedIn: false,
     user: null,
+    refetch,
   };
 }

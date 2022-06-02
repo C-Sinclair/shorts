@@ -17,13 +17,18 @@ interface CreateContextOptions {
 export async function createContextInner(opts: CreateContextOptions) {
   const { authorization } = opts;
   if (authorization) {
-    const session = await auth.getSession({ Authorization: authorization });
-    return {
-      session,
-      authorization,
-      auth,
-      prisma,
-    };
+    try {
+      console.info("Authorization:", authorization);
+      const session = await auth.getSession({ Authorization: authorization });
+      return {
+        session,
+        authorization,
+        auth,
+        prisma,
+      };
+    } catch (e) {
+      console.error(e);
+    }
   }
   return {
     auth,

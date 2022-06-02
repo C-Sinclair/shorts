@@ -9,8 +9,13 @@ export const userRouter = createRouter()
    */
   .query("current", {
     async resolve({ ctx }) {
-      console.log("CURRENT");
-      return ctx.session?.user;
+      if (!ctx.authorization) {
+        return null;
+      }
+      const user = await ctx.auth.getProfile({
+        Authorization: ctx.authorization,
+      });
+      return user;
     },
   })
   .mutation("login", {

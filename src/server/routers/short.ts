@@ -35,6 +35,9 @@ export const shortRouter = createRouter()
        */
       const shorts = await prisma.short.findMany({
         select: defaultShortSelect,
+        orderBy: {
+          createdAt: "desc",
+        },
       });
       return shorts;
     },
