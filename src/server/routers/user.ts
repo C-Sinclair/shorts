@@ -9,13 +9,7 @@ export const userRouter = createRouter()
    */
   .query("current", {
     async resolve({ ctx }) {
-      if (!ctx.authorization) {
-        return null;
-      }
-      const user = await ctx.auth.getProfile({
-        Authorization: ctx.authorization,
-      });
-      return user;
+      return ctx.user;
     },
   })
   .mutation("login", {

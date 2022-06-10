@@ -19,14 +19,15 @@ export async function createContextInner(opts: CreateContextOptions) {
   if (authorization) {
     try {
       console.info("Authorization:", authorization);
-      const session = await auth.getSession({ Authorization: authorization });
+      const user = await auth.getProfile({ Authorization: authorization });
       return {
-        session,
+        user,
         authorization,
         auth,
         prisma,
       };
     } catch (e) {
+      console.log("error getting session!");
       console.error(e);
     }
   }
