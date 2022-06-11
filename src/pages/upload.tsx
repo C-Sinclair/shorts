@@ -1,5 +1,7 @@
+import { useRouter } from "next/router";
 import { useZorm } from "react-zorm";
 import { z } from "zod";
+import { useIsAdmin } from "~/hooks";
 import { trpc } from "~/utils/trpc";
 
 export const uploadSchema = z.object({
@@ -10,10 +12,25 @@ export const uploadSchema = z.object({
   playbackId: z.string(),
 });
 
-/**
- * TODO: block non admin users (suspense + async fetch of user permission)
- */
 export default function Upload() {
+  const router = useRouter();
+  const { isAdmin, isLoading } = useIsAdmin();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (!isAdmin) {
+    console.log("not admin, redirecting");
+    router.push("/");
+    return <></>;
+  }
+  return (
+    <div className="flex justify-center h-screen">
+      <UploadForm />
+    </div>
+  );
+}
+
+function UploadForm() {
   const t = trpc.useMutation(["short.admin.add"]);
   const zo = useZorm("upload", uploadSchema, {
     async onValidSubmit(e) {

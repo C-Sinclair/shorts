@@ -1,14 +1,18 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { useUser } from "~/hooks";
+import { useIsAdmin, useUser } from "~/hooks";
 
 export function Header() {
+  const { isAdmin } = useIsAdmin();
   return (
     <header className="flex justify-between p-4 backdrop-hue-rotate-180 border-slate-900/10 backdrop-filter dark:border-slate-300/10 w-full">
       <Link href="/">
-        <h1 className="text-4xl font-bold text-yellow-400 font-title cursor-pointer">
-          Shorts
-        </h1>
+        <div>
+          <h1 className="text-4xl font-bold text-yellow-400 font-title cursor-pointer">
+            Shorts
+          </h1>
+          {isAdmin && <p>admin</p>}
+        </div>
       </Link>
       <Suspense fallback={<div />}>
         <AuthActions />

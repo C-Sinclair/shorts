@@ -27,7 +27,6 @@ export async function createContextInner(opts: CreateContextOptions) {
         prisma,
       };
     } catch (e) {
-      console.log("error getting session!");
       console.error(e);
     }
   }
