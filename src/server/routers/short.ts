@@ -46,7 +46,7 @@ export const shortRouter = createRouter()
     input: z.object({
       id: z.string(),
     }),
-    async resolve({ input, ctx: { prisma, session } }) {
+    async resolve({ input, ctx: { prisma, user } }) {
       const { id } = input;
       const short = await prisma.short.findUnique({
         where: { id },
@@ -62,7 +62,7 @@ export const shortRouter = createRouter()
       await prisma.view.create({
         data: {
           short: { connect: { id } },
-          userId: session?.user?.id,
+          userId: user?.id,
         },
       });
       const views = short.views.length + 1;
@@ -76,11 +76,11 @@ export const shortRouter = createRouter()
     input: z.object({
       shortId: z.string(),
     }),
-    async resolve({ input, ctx: { prisma, session } }) {
+    async resolve({ input, ctx: { prisma, user } }) {
       await prisma.view.create({
         data: {
           short: { connect: { id: input.shortId } },
-          userId: session?.user?.id,
+          userId: user?.id,
         },
       });
     },
@@ -96,11 +96,11 @@ export const shortRouter = createRouter()
         ReactionType.COOL,
       ]),
     }),
-    async resolve({ input, ctx: { prisma, session } }) {
+    async resolve({ input, ctx: { prisma, user } }) {
       await prisma.reaction.create({
         data: {
           short: { connect: { id: input.shortId } },
-          userId: session?.user?.id,
+          userId: user?.id,
           type: input.reaction,
         },
       });
@@ -110,7 +110,7 @@ export const shortRouter = createRouter()
     "admin.",
     createRouter()
       .middleware(async ({ ctx, next }) => {
-        const roles = ctx.session?.user?.roles || [];
+        const roles = ctx.user?.roles || [];
         const isAdmin = roles.includes("admin");
         if (!isAdmin) {
           throw new TRPCError({ code: "UNAUTHORIZED" });
