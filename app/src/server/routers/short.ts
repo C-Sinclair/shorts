@@ -1,7 +1,8 @@
 import { Prisma, ReactionType } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { uploadSchema } from "~/pages/upload";
+import { editShortSchema } from "~/pages/admin/short/[id]";
+import { uploadSchema } from "~/pages/admin/upload";
 import { createRouter } from "~/server/createRouter";
 
 /**
@@ -130,12 +131,7 @@ export const shortRouter = createRouter()
       .mutation("edit", {
         input: z.object({
           id: z.string().uuid(),
-          data: z.object({
-            title: z.string().min(1).max(32).optional(),
-            description: z.string().min(1).max(256).optional(),
-            path: z.string().min(3).optional(),
-            playbackId: z.string().optional(),
-          }),
+          data: editShortSchema,
         }),
         async resolve({ input, ctx }) {
           const { id, data } = input;

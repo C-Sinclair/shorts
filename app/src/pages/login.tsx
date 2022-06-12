@@ -4,7 +4,7 @@ import { useZorm } from "react-zorm";
 import { trpc } from "~/utils/trpc";
 import { useRouter } from "next/router";
 import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
-import { useUser } from "~/hooks";
+import { useQueryClient } from "react-query";
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -13,7 +13,7 @@ export const loginSchema = z.object({
 
 export default function Login() {
   const router = useRouter();
-  const { refetch } = useUser();
+  const queryClient = useQueryClient();
 
   const t = trpc.useMutation(["user.login"]);
   const zo = useZorm("login", loginSchema, {
@@ -22,8 +22,12 @@ export default function Login() {
       const res = await t.mutateAsync(e.data);
       if (res.access_token && res.user) {
         localStorage.setItem(LOCAL_STORAGE_ACCESS_KEY, res.access_token);
-        refetch();
-        router.push("/");
+        queryClient.clear();
+        if (res.user?.roles?.includes("admin")) {
+          router.push("/admin");
+        } else if (res.user) {
+          router.push("/");
+        }
       }
     },
   });

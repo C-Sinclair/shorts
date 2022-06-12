@@ -61,9 +61,6 @@
     "superjson": "^1.7.4",
     "zod": "^3.14.4"
   },
-  "engines": {
-    "node": ">=14"
-  },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   }

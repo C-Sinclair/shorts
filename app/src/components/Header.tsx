@@ -1,5 +1,8 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Suspense } from "react";
+import { useQueryClient } from "react-query";
+import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
 import { useIsAdmin, useUser } from "~/hooks";
 
 export function Header() {
@@ -23,7 +26,17 @@ export function Header() {
 }
 
 function AuthActions() {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const { isLoggedIn, user } = useUser();
+
+  const logout = () => {
+    window.localStorage.removeItem(LOCAL_STORAGE_ACCESS_KEY);
+    queryClient.clear();
+    router.push("/");
+  };
+
   return (
     <div>
       {isLoggedIn
@@ -32,9 +45,13 @@ function AuthActions() {
             {user?.picture && (
               <img src={user.picture} alt="user profile image" />
             )}
-            <Link href="/logout">
-              <a className="text-yellow-400 hover:text-yellow-200">Logout</a>
-            </Link>
+            <a
+              className="text-yellow-400 hover:text-yellow-200"
+              onClick={logout}
+              onKeyDown={(e) => e.code === "Enter" && logout}
+            >
+              Logout
+            </a>
           </>
         )
         : (

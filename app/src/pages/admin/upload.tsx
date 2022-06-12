@@ -1,8 +1,17 @@
-import { useRouter } from "next/router";
 import { useZorm } from "react-zorm";
 import { z } from "zod";
-import { useIsAdmin } from "~/hooks";
+import { AdminOnly } from "~/components/AdminOnly";
 import { trpc } from "~/utils/trpc";
+
+export default function Upload() {
+  return (
+    <AdminOnly>
+      <div className="flex justify-center h-screen">
+        <UploadForm />
+      </div>
+    </AdminOnly>
+  );
+}
 
 export const uploadSchema = z.object({
   id: z.string().uuid().optional(),
@@ -11,24 +20,6 @@ export const uploadSchema = z.object({
   path: z.string().min(3),
   playbackId: z.string(),
 });
-
-export default function Upload() {
-  const router = useRouter();
-  const { isAdmin, isLoading } = useIsAdmin();
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (!isAdmin) {
-    console.log("not admin, redirecting");
-    router.push("/");
-    return <></>;
-  }
-  return (
-    <div className="flex justify-center h-screen">
-      <UploadForm />
-    </div>
-  );
-}
 
 function UploadForm() {
   const t = trpc.useMutation(["short.admin.add"]);

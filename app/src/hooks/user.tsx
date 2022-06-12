@@ -5,7 +5,6 @@ type UseUser =
   & {
     isLoading?: boolean;
     error?: Error;
-    refetch: () => void;
   }
   & (
     | {
@@ -22,21 +21,19 @@ type UseUser =
   );
 
 export function useUser(): UseUser {
-  const { data, refetch, isLoading } = trpc.useQuery(["user.current"], {
+  const { data, isLoading } = trpc.useQuery(["user.current"], {
     ssr: false,
   });
   if (data) {
     return {
       isLoggedIn: true,
       user: data,
-      refetch,
       isLoading,
     };
   }
   return {
     isLoggedIn: false,
     user: null,
-    refetch,
   };
 }
 
