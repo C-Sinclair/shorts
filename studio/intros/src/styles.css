@@ -57,3 +57,26 @@ p#prompt.blink {
 		opacity: 0;
 	}
 }
+
+.sequential {
+	position: absolute;
+	top: 0;
+	text-align: center;
+	width: 100%;
+}
+
+.operations {
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
+}
+
+#go-static {
+	justify-content: center;
+	flex-direction: column;
+}
+
+#go-static h1 {
+	margin: 0;
+}

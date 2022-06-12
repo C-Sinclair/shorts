@@ -39,6 +39,7 @@ netlify
 
 # next.js
 /.next/
+.next
 /out/
 
 # production

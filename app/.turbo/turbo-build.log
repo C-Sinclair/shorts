@@ -1,0 +1,36 @@
+@shorts/app:build: cache hit, replaying output [2m16a834e94fab9e4a[0m
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m> @shorts/app@0.1.0 build /home/conor/Repos/C-Sinclair/shorts.sinclair.software/app
+[35m@shorts/app:build: [0m> pnpm prisma:generate && next build
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m> @shorts/app@0.1.0 prisma:generate /home/conor/Repos/C-Sinclair/shorts.sinclair.software/app
+[35m@shorts/app:build: [0m> prisma generate
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0mEnvironment variables loaded from .env
+[35m@shorts/app:build: [0mPrisma schema loaded from prisma/schema.prisma
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m✔ Generated Prisma Client (3.15.1 | library) to ./../node_modules/.pnpm/@prisma+client@3.15.1_prisma@3.15.1/node_modules/@prisma/client in 59ms
+[35m@shorts/app:build: [0mYou can now start using Prisma Client in your code. Reference: https://pris.ly/d/client
+[35m@shorts/app:build: [0m```
+[35m@shorts/app:build: [0mimport { PrismaClient } from '@prisma/client'
+[35m@shorts/app:build: [0mconst prisma = new PrismaClient()
+[35m@shorts/app:build: [0m```
+[35m@shorts/app:build: [0minfo  - Loaded env from /home/conor/Repos/C-Sinclair/shorts.sinclair.software/app/.env
+[35m@shorts/app:build: [0minfo  - Checking validity of types...
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m./src/components/DefaultLayout.tsx
+[35m@shorts/app:build: [0m25:9  Warning: Do not use <img>. Use Image from 'next/image' instead. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m./src/components/Header.tsx
+[35m@shorts/app:build: [0m33:15  Warning: Do not use <img>. Use Image from 'next/image' instead. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m./src/components/ShortItem.tsx
+[35m@shorts/app:build: [0m61:7  Warning: Do not use <img>. Use Image from 'next/image' instead. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[35m@shorts/app:build: [0m66:7  Warning: Do not use <img>. Use Image from 'next/image' instead. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m./src/components/VideoPlayer.tsx
+[35m@shorts/app:build: [0m38:5  Warning: React Hook useEffect has a missing dependency: 'src'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0minfo  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+[35m@shorts/app:build: [0minfo  - Creating an optimized production build...
