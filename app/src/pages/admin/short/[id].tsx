@@ -47,12 +47,18 @@ function EditShortForm() {
 
   useEffect(
     function updateFieldsOnDataChange() {
-      if (t.data && zo.ref.current) {
-        zo.ref.current;
-        // set input values to data
+      if (t.data) {
+        Object.keys(editShortSchema.shape).forEach((field) => {
+          const elem = zo.ref.current?.elements.namedItem(
+            field,
+          ) as HTMLInputElement;
+          if (elem) {
+            elem.value = t.data[field];
+          }
+        });
       }
     },
-    [t.data, zo.ref],
+    [t.data],
   );
 
   return (

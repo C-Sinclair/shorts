@@ -5,7 +5,7 @@ import { useAllShorts } from "~/hooks/all-shorts";
 export default function Admin() {
   return (
     <AdminOnly>
-      <div className="flex justify-center h-screen">
+      <div className="h-screen">
         <h1>Admin only area!</h1>
         <Link href="/admin/upload">
           <a>Upload a new short</a>
@@ -26,13 +26,13 @@ function ShortsList() {
     return <div>No shorts found</div>;
   }
   return (
-    <ul>
+    <ul className="flex flex-col justify-start">
       {shorts?.map((short) => (
-        <li key={short.id}>
-          <Link href="/admin/short/[id]" as={`/admin/edit/${short.id}`}>
-            <a>{short.title}</a>
-          </Link>
-        </li>
+        <Link href={`/admin/short/${short.id}`} key={short.id}>
+          <li className="p-10 bg-blue-900 cursor-pointer mb-4">
+            <h1>{short.title}</h1>
+          </li>
+        </Link>
       ))}
     </ul>
   );

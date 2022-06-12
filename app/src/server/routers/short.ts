@@ -130,7 +130,7 @@ export const shortRouter = createRouter()
       })
       .mutation("edit", {
         input: z.object({
-          id: z.string().uuid(),
+          id: z.string(),
           data: editShortSchema,
         }),
         async resolve({ input, ctx }) {
