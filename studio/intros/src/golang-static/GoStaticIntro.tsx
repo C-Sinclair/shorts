@@ -14,15 +14,15 @@ const gopherRightEyeClosed = staticFile("gopher-right-eye-closed.svg");
 
 export const GoStaticIntro = () => {
   const frame = useCurrentFrame();
-  const staticOpacity = interpolate(frame, [2, 6, 145, 150], [0, 1, 1, 0], {
+  const staticOpacity = interpolate(frame, [2, 6, 125, 130], [0, 1, 1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const assetOpacity = interpolate(frame, [6, 9, 143, 147], [0, 1, 1, 0], {
+  const assetOpacity = interpolate(frame, [6, 9, 123, 127], [0, 1, 1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const serverOpacity = interpolate(frame, [9, 12, 140, 145], [0, 1, 1, 0], {
+  const serverOpacity = interpolate(frame, [9, 12, 120, 125], [0, 1, 1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -51,10 +51,15 @@ export const GoStaticIntro = () => {
 const Gopher = () => {
   const frame = useCurrentFrame();
 
-  const bottom = interpolate(frame, [0, 40, 45, 70], [-550, -399, -400, -280], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const bottom = interpolate(
+    frame,
+    [0, 10, 25, 28, 60, 70, 135, 150],
+    [-550, -399, -400, -420, -374, -280, -300, -550],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
   const rotate = interpolate(frame, [40, 50], [0, 0], {
     extrapolateLeft: "clamp",
   });
