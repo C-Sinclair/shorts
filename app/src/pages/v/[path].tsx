@@ -45,6 +45,8 @@ export const getStaticProps: GetStaticProps<VideoPageProps> = async (ctx) => {
     props: {
       short,
     },
+    // 1 minute
+    revalidate: 60,
   };
 };
 
