@@ -5,7 +5,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import "../styles.css";
+import "./styles.css";
 
 export const RipIntro = () => {
   const frame = useCurrentFrame();

@@ -1,11 +1,5 @@
-import {
-  Easing,
-  Img,
-  interpolate,
-  interpolateColors,
-  useCurrentFrame,
-} from "remotion";
-import "../styles.css";
+import { Img, interpolate, interpolateColors, useCurrentFrame } from "remotion";
+import "./styles.css";
 
 export const AsyncIntro = () => {
   return (

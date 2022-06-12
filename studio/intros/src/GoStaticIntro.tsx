@@ -5,7 +5,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import "../styles.css";
+import "./styles.css";
 
 const gopherEyesOpen = staticFile("gopher-eyes-open.svg");
 const gopherEyesClosed = staticFile("gopher-eyes-closed.svg");
