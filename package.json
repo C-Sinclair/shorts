@@ -11,5 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "turbo": "^1.2.16"
+  },
+  "prisma": {
+    "schema": "app/prisma/schema.prisma"
   }
 }
