@@ -18,6 +18,7 @@ const defaultShortSelect = Prisma.validator<Prisma.ShortSelect>()({
   updatedAt: true,
   playbackId: true,
   path: true,
+  thumbnailTime: true,
   // grab only the View's id by default
   views: {
     select: {

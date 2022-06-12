@@ -9,6 +9,7 @@ interface ShortItemProps {
   description: string;
   playbackId: string;
   path: string;
+  thumbnailTime?: number;
 }
 
 /**
@@ -20,6 +21,7 @@ export function ShortItem({
   description,
   playbackId,
   path,
+  thumbnailTime,
 }: ShortItemProps) {
   const router = useRouter();
 
@@ -59,7 +61,9 @@ export function ShortItem({
       aria-current={isFocused}
     >
       <img
-        src={`https://image.mux.com/${playbackId}/thumbnail.png?width=400`}
+        src={`https://image.mux.com/${playbackId}/thumbnail.png?width=400&height=400&fit_mode=pad${
+          thumbnailTime ? `&time=${thumbnailTime}` : ""
+        }`}
         alt="thumbnail"
         className="absolute top-0 right-0 w-full h-full object-right-bottom object-cover -z-10"
       />
@@ -69,7 +73,7 @@ export function ShortItem({
         loading="lazy"
         className="absolute top-0 right-0 w-full h-full object-right-bottom object-cover -z-5 opacity-0 group-hover:opacity-100"
       />
-      <h1 className="font-code group-hover:text-yellow-500 font-bold text-2xl absolute top-4 left-4">
+      <h1 className="font-code opacity-0 group-hover:opacity-100 text-yellow-500 font-bold text-2xl absolute top-4 left-4">
         {title}
       </h1>
     </article>
