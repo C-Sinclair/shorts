@@ -8,7 +8,7 @@ import { useIsAdmin, useUser } from "~/hooks";
 export function Header() {
   const { isAdmin } = useIsAdmin();
   return (
-    <header className="flex justify-between p-4 backdrop-hue-rotate-180 border-slate-900/10 backdrop-filter dark:border-slate-300/10 w-full">
+    <header className="fixed top-0 left-0 z-10 flex justify-between p-4 backdrop-hue-rotate-180 border-slate-900/10 backdrop-filter dark:border-slate-300/10 w-full">
       <Link href="/">
         <div className="relative">
           <h1 className="text-4xl font-bold text-yellow-400 font-title cursor-pointer">
@@ -54,7 +54,9 @@ function AuthActions() {
             </a>
           </>
         )
-        : (
+        : null}
+      {
+        /** (
           <>
             <Link href="/login">
               <a className="text-yellow-400 hover:text-yellow-200">Login</a>
@@ -65,7 +67,8 @@ function AuthActions() {
               </a>
             </Link>
           </>
-        )}
+        )*/
+      }
     </div>
   );
 }

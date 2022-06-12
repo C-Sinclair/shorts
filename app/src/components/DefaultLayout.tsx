@@ -30,7 +30,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
       </div>
 
       <Header />
-      <main className="flex-grow p-4 space-y-2 w-full z-5">{children}</main>
+      <main className="flex-grow space-y-2 w-full z-5">{children}</main>
 
       {process.env.NODE_ENV !== "production" && (
         <ReactQueryDevtools initialIsOpen={false} />

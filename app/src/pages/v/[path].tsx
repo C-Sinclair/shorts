@@ -3,7 +3,9 @@ import { prisma } from "~/server/prisma";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { VideoPlayer } from "~/components/VideoPlayer";
 import { trpc } from "~/utils/trpc";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import { atom, useAtom } from "jotai";
+import clsx from "clsx";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const shorts = await prisma.short.findMany();
@@ -55,14 +57,43 @@ interface VideoPageProps {
 }
 
 export default function VideoPage({ short }: VideoPageProps) {
+  const [paused, setPaused] = useState(false);
+
+  const onPlay = () => {
+    setPaused(false);
+  };
+  const onPause = () => {
+    setPaused(true);
+  };
   return (
-    <article className="group text-white">
-      <VideoPlayer playbackId={short.playbackId} />
-      <h1 className="text-5xl">{short.title}</h1>
-      <p className="mt-2">{short.description}</p>
-      <Suspense fallback={<div />}>
-        <ViewCount id={short.id} />
-      </Suspense>
+    <article className="group text-white relative h-screen w-screen bg-black">
+      <VideoPlayer
+        playbackId={short.playbackId}
+        autoplay
+        onPlay={onPlay}
+        onPause={onPause}
+      />
+      <div
+        className={clsx(
+          "bg-gradient-to-t bottom-0 px-8 absolute w-full overflow-hidden max-h-0 h-full transition-all duration-500 pointer-events-none",
+          {
+            "max-h-48 py-8": paused,
+          },
+        )}
+      >
+        <h1 className="text-5xl">{short.title}</h1>
+        <p className="mt-2">{short.description}</p>
+      </div>
+      <div
+        className={clsx("absolute top-8 right-8 transition-opacity", {
+          "opacity-100": paused,
+          "opacity-0": !paused,
+        })}
+      >
+        <Suspense fallback={<div />}>
+          <ViewCount id={short.id} />
+        </Suspense>
+      </div>
     </article>
   );
 }

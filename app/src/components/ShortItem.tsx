@@ -9,7 +9,7 @@ interface ShortItemProps {
   description: string;
   playbackId: string;
   path: string;
-  thumbnailTime?: number;
+  thumbnailTime?: number | null;
 }
 
 /**
@@ -47,6 +47,10 @@ export function ShortItem({
     }
   };
 
+  const onHover = () => {
+    router.prefetch(`/v/${path}`);
+  };
+
   return (
     <article
       className={clsx(
@@ -58,12 +62,12 @@ export function ShortItem({
       title={description}
       onClick={onClick}
       onKeyDown={onKeyDown}
+      onMouseOver={onHover}
       aria-current={isFocused}
     >
       <img
-        src={`https://image.mux.com/${playbackId}/thumbnail.png?width=400&height=400&fit_mode=pad${
-          thumbnailTime ? `&time=${thumbnailTime}` : ""
-        }`}
+        src={`https://image.mux.com/${playbackId}/thumbnail.png?width=400&height=400&fit_mode=pad${thumbnailTime ? `&time=${thumbnailTime}` : ""
+          }`}
         alt="thumbnail"
         className="absolute top-0 right-0 w-full h-full object-right-bottom object-cover -z-10"
       />
