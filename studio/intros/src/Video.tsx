@@ -3,6 +3,7 @@ import { RipIntro } from "./RipIntro";
 import { AsyncIntro } from "./AsyncIntro";
 import { GoStaticIntro } from "./GoStaticIntro";
 import { JotaiAsyncIntro } from "./JotaiAsyncIntro";
+import { TypedCssVarsIntro } from "./TypedCssVarsIntro";
 
 const FPS = 30;
 
@@ -39,6 +40,15 @@ export const VideoRoot = () => {
       <Composition
         id="jotai-async-intro"
         component={JotaiAsyncIntro}
+        // 5 seconds in length
+        durationInFrames={5 * FPS}
+        fps={FPS}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="typed-css-vars-intro"
+        component={TypedCssVarsIntro}
         // 5 seconds in length
         durationInFrames={5 * FPS}
         fps={FPS}

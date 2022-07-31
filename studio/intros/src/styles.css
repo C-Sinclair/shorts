@@ -96,3 +96,31 @@ p#prompt.blink {
 		transform: translateY(0);
 	}
 }
+
+#typed-css-vars {
+	flex-direction: column;
+}
+
+#typed-css-vars .typed {
+	color: #007acc;
+}
+#typed-css-vars .variables {
+	color: #007acc;
+}
+#typed-css-vars :is(.css, .react) {
+	width: 200px;
+}
+#typed-css-vars .react {
+	animation: spin 2s linear infinite;
+	position: absolute;
+	bottom: 100px;
+	right: 100px;
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+	}
+}
