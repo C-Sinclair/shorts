@@ -5,13 +5,17 @@ import { useAllShorts } from "~/hooks/all-shorts";
 export default function Admin() {
   return (
     <AdminOnly>
-      <div className="h-screen">
-        <h1>Admin only area!</h1>
-        <Link href="/admin/upload">
-          <a>Upload a new short</a>
-        </Link>
+      <section className="h-screen mt-20 p-10 text-white">
+        <header className="flex justify-between items-center">
+          <h1 className="font-bold text-3xl">Admin only area!</h1>
+          <Link href="/admin/upload">
+            <a className="hover:text-purple-500 hover:underline">
+              Upload a new short
+            </a>
+          </Link>
+        </header>
         <ShortsList />
-      </div>
+      </section>
     </AdminOnly>
   );
 }
@@ -29,7 +33,7 @@ function ShortsList() {
     <ul className="flex flex-col justify-start">
       {shorts?.map((short) => (
         <Link href={`/admin/short/${short.id}`} key={short.id}>
-          <li className="p-10 bg-blue-900 cursor-pointer mb-4">
+          <li className="p-10 bg-blue-900 cursor-pointer mt-4 mb-4">
             <h1>{short.title}</h1>
           </li>
         </Link>
