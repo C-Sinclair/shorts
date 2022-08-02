@@ -135,10 +135,19 @@ export const shortRouter = createRouter()
           data: editShortSchema,
         }),
         async resolve({ input, ctx }) {
-          const { id, data } = input;
+          const {
+            id,
+            data: { previewGifStartTime, thumbnailTime, ...data },
+          } = input;
           const short = await ctx.prisma.short.update({
             where: { id },
-            data,
+            data: {
+              ...data,
+              previewGifStartTime: previewGifStartTime
+                ? parseInt(previewGifStartTime)
+                : null,
+              thumbnailTime: thumbnailTime ? parseInt(thumbnailTime) : null,
+            },
             select: defaultShortSelect,
           });
           return short;

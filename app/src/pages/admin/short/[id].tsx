@@ -20,6 +20,8 @@ export const editShortSchema = z.object({
   description: z.string().min(1).max(256).optional(),
   path: z.string().min(3),
   playbackId: z.string(),
+  thumbnailTime: z.string().optional(),
+  previewGifStartTime: z.string().optional(),
 });
 
 function EditShortForm() {
@@ -70,8 +72,8 @@ function EditShortForm() {
   );
 
   return (
-    <>
-      <h1>Edit short</h1>
+    <div className="flex flex-col items-center w-full mt-10">
+      <h1 className="text-white text-3xl">Edit short</h1>
       <form className="flex flex-col p-20 bg-black max-w-md" ref={zo.ref}>
         <div className="mb-4 w-full">
           <label htmlFor="title" className="text-white">
@@ -117,6 +119,34 @@ function EditShortForm() {
             aria-invalid={Boolean(zo.errors.playbackId())}
           />
         </div>
+        <div className="mb-4 w-full">
+          <label htmlFor="thumbnailTime" className="text-white">
+            Thumbnail Time (s)
+          </label>
+          <input
+            name={zo.fields.thumbnailTime()}
+            id="thumbnailTime"
+            className="w-full"
+            type="number"
+            aria-invalid={Boolean(zo.errors.thumbnailTime())}
+          />
+          <p className="text-red-50">{zo.errors.thumbnailTime()?.message}</p>
+        </div>
+        <div className="mb-4 w-full">
+          <label htmlFor="previewGifStartTime" className="text-white">
+            Preview Gif Start Time (s)
+          </label>
+          <input
+            name={zo.fields.previewGifStartTime()}
+            id="previewGifStartTime"
+            className="w-full"
+            type="number"
+            aria-invalid={Boolean(zo.errors.previewGifStartTime())}
+          />
+          <p className="text-red-50">
+            {zo.errors.previewGifStartTime()?.message}
+          </p>
+        </div>
         <button
           type="submit"
           className="self-end mt-4 text-white"
@@ -125,6 +155,6 @@ function EditShortForm() {
           Submit
         </button>
       </form>
-    </>
+    </div>
   );
 }
