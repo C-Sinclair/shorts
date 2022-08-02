@@ -30,14 +30,24 @@ function ShortsList() {
     return <div>No shorts found</div>;
   }
   return (
-    <ul className="flex flex-col justify-start">
-      {shorts?.map((short) => (
-        <Link href={`/admin/short/${short.id}`} key={short.id}>
-          <li className="p-10 bg-blue-900 cursor-pointer mt-4 mb-4">
-            <h1>{short.title}</h1>
-          </li>
-        </Link>
-      ))}
-    </ul>
+    <article id="shorts-list" className="mt-4">
+      <h4 className="font-code text-xl">
+        Currently {shorts.length} shorts live
+      </h4>
+      <ul className="flex flex-col justify-start">
+        {shorts?.map((short) => (
+          <Link href={`/admin/short/${short.id}`} key={short.id}>
+            <li className="pt-6 px-8 py-8 pb-6 bg-zinc-900 cursor-pointer mt-4 mb-4 hover:bg-zinc-700">
+              <header className="flex justify-between items-center">
+                <p title="id">{short.id}</p>
+                <p title="playbackId">{short.playbackId}</p>
+              </header>
+              <h1 className="text-xl">{short.title}</h1>
+              <p>{short.description}</p>
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </article>
   );
 }
