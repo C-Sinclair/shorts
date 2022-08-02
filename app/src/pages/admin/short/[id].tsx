@@ -5,6 +5,7 @@ import { trpc } from "~/utils/trpc";
 import { z } from "zod";
 import { useQueryClient } from "react-query";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function EditShort() {
   return (
@@ -33,10 +34,17 @@ function EditShortForm() {
   const zo = useZorm("edit", editShortSchema, {
     async onValidSubmit(e) {
       e.preventDefault();
-      await m.mutateAsync({
-        id,
-        data: e.data,
-      });
+      await toast.promise(
+        m.mutateAsync({
+          id,
+          data: e.data,
+        }),
+        {
+          loading: "Updating...",
+          success: (data) => `Updated short! ID: ${data.id}`,
+          error: "Error updating short!",
+        },
+      );
       await Promise.all([
         queryClient.invalidateQueries(["short.all"]),
         queryClient.invalidateQueries(["short.byId", { id }]),

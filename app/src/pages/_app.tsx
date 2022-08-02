@@ -4,6 +4,7 @@ import { ReactElement, ReactNode } from "react";
 import { DefaultLayout } from "~/components/DefaultLayout";
 import { trpc, trpcClient } from "~/utils/trpc";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from "react-hot-toast";
 
 import "~/styles/global.css";
 
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <Component {...pageProps} />
         </DefaultLayout>
       </QueryClientProvider>
+      <Toaster position="bottom-center" />
     </trpc.Provider>
   );
 }

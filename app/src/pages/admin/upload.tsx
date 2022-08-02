@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useZorm } from "react-zorm";
 import { z } from "zod";
 import { AdminOnly } from "~/components/AdminOnly";
@@ -24,12 +25,18 @@ function UploadForm() {
   const zo = useZorm("upload", uploadSchema, {
     async onValidSubmit(e) {
       e.preventDefault();
-      await t.mutateAsync(e.data);
+      await toast.promise(t.mutateAsync(e.data), {
+        loading: "Uploading...",
+        success: (data) => `Uploaded new short! ID: ${data.id}`,
+        error: "Error uploading short!",
+      });
     },
   });
   return (
-    <div className="mt-10 flex flex-col items-center w-full text-white">
-      <h1 className="text-3xl font-bold text-left">Upload a short</h1>
+    <div className="mt-10 flex flex-col items-center w-full">
+      <h1 className="text-3xl font-bold text-left text-white">
+        Upload a short
+      </h1>
       <form className="flex flex-col p-20 bg-black h-fit" ref={zo.ref}>
         <div className="mb-4 w-full">
           <label htmlFor="title" className="text-white">
