@@ -6,9 +6,7 @@ import { trpc } from "~/utils/trpc";
 export default function Upload() {
   return (
     <AdminOnly>
-      <div className="flex justify-center h-screen">
-        <UploadForm />
-      </div>
+      <UploadForm />
     </AdminOnly>
   );
 }
@@ -30,9 +28,9 @@ function UploadForm() {
     },
   });
   return (
-    <>
-      <h1>Upload</h1>
-      <form className="flex flex-col p-20 bg-black max-w-md" ref={zo.ref}>
+    <div className="mt-10 flex flex-col items-center w-full text-white">
+      <h1 className="text-3xl font-bold text-left">Upload a short</h1>
+      <form className="flex flex-col p-20 bg-black h-fit" ref={zo.ref}>
         <div className="mb-4 w-full">
           <label htmlFor="title" className="text-white">
             Title
@@ -85,6 +83,6 @@ function UploadForm() {
           Submit
         </button>
       </form>
-    </>
+    </div>
   );
 }
