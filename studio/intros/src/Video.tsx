@@ -4,6 +4,7 @@ import { AsyncIntro } from "./AsyncIntro";
 import { GoStaticIntro } from "./GoStaticIntro";
 import { JotaiAsyncIntro } from "./JotaiAsyncIntro";
 import { TypedCssVarsIntro } from "./TypedCssVarsIntro";
+import { TmuxSessionCommsIntro } from "./TmuxSessionCommsIntro";
 
 const FPS = 30;
 
@@ -49,6 +50,15 @@ export const VideoRoot = () => {
       <Composition
         id="typed-css-vars-intro"
         component={TypedCssVarsIntro}
+        // 5 seconds in length
+        durationInFrames={5 * FPS}
+        fps={FPS}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="tmux-session-communication"
+        component={TmuxSessionCommsIntro}
         // 5 seconds in length
         durationInFrames={5 * FPS}
         fps={FPS}

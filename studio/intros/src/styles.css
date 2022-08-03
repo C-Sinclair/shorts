@@ -124,3 +124,46 @@ p#prompt.blink {
 		transform: rotate(-360deg);
 	}
 }
+
+#tmux-session-comms {
+}
+
+#tmux-session-comms h1 {
+	/** tmux green */
+	color: #1bb91f;
+}
+
+#tmux-session-comms .session {
+	position: absolute;
+	top: 200px;
+	left: 100px;
+	font-size: 60px;
+}
+
+#tmux-session-comms .communication {
+	position: absolute;
+	bottom: 0px;
+}
+
+#tmux-session-comms .tmux {
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	width: 500px;
+}
+
+#tmux-session-comms .megaphone {
+	position: absolute;
+	bottom: -100px;
+	left: -150px;
+	width: 500px;
+	z-index: 20;
+}
+
+#tmux-session-comms .communication2 {
+	position: absolute;
+	bottom: 300px;
+	left: 150px;
+	font-size: 50px;
+	z-index: 1;
+}
