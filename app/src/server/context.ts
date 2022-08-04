@@ -1,21 +1,14 @@
-import * as trpc from "@trpc/server";
-import * as trpcNext from "@trpc/server/adapters/next";
+import { inferAsyncReturnType, initTRPC } from "@trpc/server";
+import { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
 import { auth } from "./auth";
-import { prisma } from "./prisma";
-
-interface CreateContextOptions {
-  /**
-   * The auth header
-   */
-  authorization?: string;
-}
 
 /**
- * Inner function for `createContext` where we create the context.
- * This is useful for testing when we don't want to mock Next.js' request/response
+ * Creates context for an incoming request
+ * @link https://trpc.io/docs/context
+ * @TODO: cache responses
  */
-export async function createContextInner(opts: CreateContextOptions) {
-  const { authorization } = opts;
+export async function createContext(opts: CreateHTTPContextOptions) {
+  const { authorization } = opts.req.headers;
   if (authorization) {
     try {
       console.info("Authorization:", authorization);
@@ -24,7 +17,6 @@ export async function createContextInner(opts: CreateContextOptions) {
         user,
         authorization,
         auth,
-        prisma,
       };
     } catch (e) {
       console.error(e);
@@ -32,23 +24,9 @@ export async function createContextInner(opts: CreateContextOptions) {
   }
   return {
     auth,
-    prisma,
   };
 }
 
-export type Context = trpc.inferAsyncReturnType<typeof createContextInner>;
+export type Context = inferAsyncReturnType<typeof createContext>;
 
-/**
- * Creates context for an incoming request
- * @link https://trpc.io/docs/context
- * @TODO: cache responses
- */
-export async function createContext({
-  req,
-}: trpcNext.CreateNextContextOptions): Promise<Context> {
-  const { authorization } = req.headers;
-
-  return await createContextInner({
-    authorization,
-  });
-}
+export const t = initTRPC<{ ctx: Context }>()();
