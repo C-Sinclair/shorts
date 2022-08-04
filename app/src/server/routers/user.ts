@@ -1,20 +1,15 @@
 import { TRPCError } from "@trpc/server";
 import { loginSchema } from "~/pages/login";
 import { signupSchema } from "~/pages/signup";
-import { createRouter } from "~/server/createRouter";
+import { t } from "../context";
 
-export const userRouter = createRouter()
+export const userRouter = t.router({
   /**
    * @returns the current user
    */
-  .query("current", {
-    async resolve({ ctx }) {
-      return ctx.user;
-    },
-  })
-  .mutation("login", {
-    input: loginSchema,
-    async resolve({ input, ctx: { auth } }) {
+  current: t.procedure.query(({ ctx }) => ctx.user),
+  login: t.procedure.input(loginSchema).mutation(
+    async ({ input, ctx: { auth } }) => {
       const { email, password } = input;
       const authToken = await auth.login({ email, password });
       if (!authToken) {
@@ -25,17 +20,15 @@ export const userRouter = createRouter()
       }
       return authToken;
     },
-  })
-  .mutation("logout", {
-    async resolve({ ctx }) {
-      if (ctx.authorization) {
-        await ctx.auth.logout({ Authorization: ctx.authorization });
-      }
-    },
-  })
-  .mutation("register", {
-    input: signupSchema,
-    async resolve({ input, ctx: { auth } }) {
+  ),
+  logout: t.procedure.mutation(async ({ ctx }) => {
+    if (ctx.authorization) {
+      await ctx.auth.logout({ Authorization: ctx.authorization });
+    }
+  }),
+
+  register: t.procedure.input(signupSchema)
+    .mutation(async ({ input, ctx: { auth } }) => {
       const { email, password, confirm_password } = input;
       const authToken = await auth.signup({
         email,
@@ -49,5 +42,5 @@ export const userRouter = createRouter()
         });
       }
       return authToken;
-    },
-  });
+    }),
+});

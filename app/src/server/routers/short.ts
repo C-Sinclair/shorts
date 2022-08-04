@@ -7,7 +7,7 @@ import { adminOnly } from "./middleware";
 
 export const shortRouter = t.router({
   all: t.procedure.query(async ({ ctx }) => {
-    return [];
+    return [] as {}[];
   }),
   byId: t.procedure.input(z.object({
     id: z.string(),

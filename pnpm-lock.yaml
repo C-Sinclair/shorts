@@ -20,6 +20,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^4.30.0
       '@typescript-eslint/parser': ^5.14.0
       '@vercel/node': ^2.5.6
+      abort-controller: ^3.0.0
       autoprefixer: ^10.4.7
       babel-preset-solid: ^1.4.8
       clsx: ^1.1.1
@@ -51,6 +52,7 @@ importers:
       '@trpc/client': 10.0.0-alpha.41_@trpc+server@10.0.0-alpha.41
       '@trpc/server': 10.0.0-alpha.41
       '@vercel/node': 2.5.6
+      abort-controller: 3.0.0
       clsx: 1.1.1
       hls.js: 1.1.5
       jotai: 1.7.2
@@ -1334,6 +1336,13 @@ packages:
   /abab/2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
     dev: true
+
+  /abort-controller/3.0.0:
+    resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
+    engines: {node: '>=6.5'}
+    dependencies:
+      event-target-shim: 5.0.1
+    dev: false
 
   /accepts/1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -3375,6 +3384,11 @@ packages:
   /etag/1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /event-target-shim/5.0.1:
+    resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
+    engines: {node: '>=6'}
     dev: false
 
   /events/3.3.0:

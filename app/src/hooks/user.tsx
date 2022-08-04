@@ -1,54 +1,14 @@
-import { User } from "@authorizerdev/authorizer-js";
+import { createResource } from "solid-js";
 import { trpc } from "~/utils/trpc";
 
-type UseUser =
-  & {
-    isLoading?: boolean;
-    error?: Error;
-  }
-  & (
-    | {
-      isLoggedIn: false;
-      user: null;
-    }
-    | {
-      /**
-       * The currently logged in user
-       */
-      user: User;
-      isLoggedIn: true;
-    }
-  );
+/**
+ * @resource for accessing the currently logged in user
+ */
+export const currentUser = createResource(() => trpc.user.current.query());
 
-export function useUser(): UseUser {
-  const { data, isLoading } = trpc.useQuery(["user.current"], {
-    ssr: false,
-  });
-  if (data) {
-    return {
-      isLoggedIn: true,
-      user: data,
-      isLoading,
-    };
-  }
-  return {
-    isLoggedIn: false,
-    user: null,
-  };
-}
-
-type UseIsAdmin = {
-  isAdmin?: boolean;
-  isLoading?: boolean;
+/** */
+export const isAdmin = () => {
+  const [data] = currentUser;
+  const isAdmin = data()?.roles?.includes("admin");
+  return Boolean(isAdmin);
 };
-
-export function useIsAdmin(): UseIsAdmin {
-  const { data, isLoading } = trpc.useQuery(["user.current"], {
-    ssr: false,
-  });
-  const isAdmin = data?.roles?.includes("admin");
-  return {
-    isAdmin,
-    isLoading,
-  };
-}
