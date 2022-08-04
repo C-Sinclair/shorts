@@ -1,9 +1,9 @@
 import multiparty from "multiparty";
 import { upload } from "~/server/mux";
 import { createReadStream } from "fs";
-import { NextApiRequest, NextApiResponse } from "next";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   const stream = createReadStream("upload.mp4");
 
   await new Promise((resolve, reject) => {
