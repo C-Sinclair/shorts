@@ -56,6 +56,14 @@ interface VideoPageProps {
   short: Pick<Short, "id" | "title" | "description" | "playbackId">;
 }
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "mux-player": any;
+    }
+  }
+}
+
 export default function VideoPage({ short }: VideoPageProps) {
   const [paused, setPaused] = useState(false);
 
@@ -67,11 +75,15 @@ export default function VideoPage({ short }: VideoPageProps) {
   };
   return (
     <article className="group text-white relative h-screen w-screen bg-black">
-      <VideoPlayer
-        playbackId={short.playbackId}
-        autoplay
-        onPlay={onPlay}
-        onPause={onPause}
+      <mux-player
+        stream-type="on-demand"
+        playback-id={short.playbackId}
+        metadata-video-title={short.title}
+        primary-color="purple"
+        secondary-color="black"
+        forward-seek-offset="15"
+        backward-seek-offset="15"
+        class="w-screen h-full"
       />
       <div
         className={clsx(
