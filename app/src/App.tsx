@@ -1,4 +1,4 @@
-import { DefaultLayout } from "~/components/DefaultLayout";
+import { DefaultLayout } from "./components/DefaultLayout";
 import { Route, Routes } from "@solidjs/router";
 import { lazy } from "solid-js";
 import { getShortData } from "./pages/v/[path].data";

@@ -1,5 +1,5 @@
 import { createResource } from "solid-js";
-import { trpc } from "~/utils/trpc";
+import { trpc } from "../utils/trpc";
 
 /**
  * @resource for accessing the currently logged in user

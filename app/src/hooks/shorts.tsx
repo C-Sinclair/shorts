@@ -1,5 +1,5 @@
 import { createResource, createSignal } from "solid-js";
-import { trpc } from "~/utils/trpc";
+import { trpc } from "../utils/trpc";
 
 export type Short = {
   id: string;

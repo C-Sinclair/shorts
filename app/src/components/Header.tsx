@@ -1,7 +1,7 @@
 import { useNavigate } from "@solidjs/router";
 import { Show, Suspense } from "solid-js/web";
-import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
-import { currentUser, isAdmin } from "~/hooks/user";
+import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
+import { currentUser, isAdmin } from "../hooks/user";
 
 export function Header() {
   return (

@@ -1,8 +1,8 @@
 import toast from "solid-toast";
 import { z } from "zod";
-import { AdminOnly } from "~/components/AdminOnly";
-import { createZodForm } from "~/utils/form";
-import { trpc } from "~/utils/trpc";
+import { AdminOnly } from "../../components/AdminOnly";
+import { createZodForm } from "../../utils/form";
+import { trpc } from "../../utils/trpc";
 
 export default function Upload() {
   return (

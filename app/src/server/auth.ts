@@ -1,5 +1,5 @@
 import { Authorizer } from "@authorizerdev/authorizer-js";
-import { AUTHORIZER_URL, CLIENT_ID } from "~/env";
+import { AUTHORIZER_URL, CLIENT_ID } from "../env";
 
 export type { AuthToken, User } from "@authorizerdev/authorizer-js";
 

@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "@solidjs/router";
 import { z } from "zod";
-import { trpc } from "~/utils/trpc";
-import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
-import { createZodForm } from "~/utils/form";
+import { trpc } from "../utils/trpc";
+import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
+import { createZodForm } from "../utils/form";
 
 const register = trpc.user.register.mutate;
 

@@ -1,5 +1,5 @@
 import { children, ParentProps, Show, Suspense } from "solid-js";
-import { isAdmin } from "~/hooks/user";
+import { isAdmin } from "../hooks/user";
 
 /**
  * Higher order component

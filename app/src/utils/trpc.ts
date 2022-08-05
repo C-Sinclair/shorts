@@ -4,17 +4,10 @@ import {
   HTTPHeaders,
   httpLink,
 } from "@trpc/client";
-import AbortController from "abort-controller";
-import fetch from "node-fetch";
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
-import type { AppRouter } from "~/server/routers/_app";
-import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
-
-// polyfill fetch & websocket
-const globalAny = global as any;
-globalAny.AbortController = AbortController;
-globalAny.fetch = fetch;
+import type { AppRouter } from "../server/routers/_app";
+import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
 
 const client = createTRPCClient<AppRouter>({
   links: [

@@ -1,6 +1,6 @@
 import { useNavigate } from "@solidjs/router";
 import clsx from "clsx";
-import { focusedShortSignal, Short } from "~/hooks/shorts";
+import { focusedShortSignal, Short } from "../hooks/shorts";
 
 type ShortItemProps = {
   short: Short;

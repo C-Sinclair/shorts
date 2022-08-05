@@ -1,11 +1,11 @@
-import { AdminOnly } from "~/components/AdminOnly";
-import { trpc } from "~/utils/trpc";
+import { AdminOnly } from "../../../components/AdminOnly";
+import { trpc } from "../../../utils/trpc";
 import { z } from "zod";
 import toast from "solid-toast";
 import { useNavigate, useParams } from "@solidjs/router";
 import { createResource, Show } from "solid-js";
-import { createZodForm } from "~/utils/form";
-import { ShortWithViews } from "~/server/routers/short";
+import { createZodForm } from "../../../utils/form";
+import { ShortWithViews } from "../../../server/routers/short";
 
 const edit = trpc.short.admin.edit.mutate;
 

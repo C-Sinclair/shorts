@@ -1,7 +1,7 @@
 import { Link } from "@solidjs/router";
 import { For, Suspense } from "solid-js";
-import { AdminOnly } from "~/components/AdminOnly";
-import { allShorts } from "~/hooks/shorts";
+import { AdminOnly } from "../../components/AdminOnly";
+import { allShorts } from "../../hooks/shorts";
 
 export default function Admin() {
   return (

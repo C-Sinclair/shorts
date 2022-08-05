@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { For } from "solid-js";
-import { allShorts, focusedShortSignal } from "~/hooks/shorts";
+import { allShorts, focusedShortSignal } from "../hooks/shorts";
 import { ShortItem } from "../components";
 
 export default function Home() {

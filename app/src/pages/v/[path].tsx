@@ -1,9 +1,9 @@
-import { VideoPlayer } from "~/components/VideoPlayer";
-import { trpc } from "~/utils/trpc";
+import { VideoPlayer } from "../../components/VideoPlayer";
+import { trpc } from "../../utils/trpc";
 import clsx from "clsx";
 import { createResource, createSignal, Suspense } from "solid-js";
 import { useRouteData } from "@solidjs/router";
-import { Short } from "~/hooks/shorts";
+import { Short } from "../../hooks/shorts";
 
 export default function VideoPage() {
   const short = useRouteData<Short>();

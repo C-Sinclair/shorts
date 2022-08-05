@@ -1,4 +1,4 @@
-import { trpc } from "~/utils/trpc";
+import { trpc } from "../../utils/trpc";
 import { createResource } from "solid-js";
 
 export function getShortData({ params }) {
