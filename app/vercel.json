@@ -1,0 +1,18 @@
+{
+  "functions": {
+    "src/pages/api/trpc/[trpc].ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    },
+    "src/pages/api/video.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/((?!api/.*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
