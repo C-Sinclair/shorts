@@ -6,18 +6,17 @@ import {
 } from "@trpc/client";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import type { AppRouter } from "../server/routers/_app";
-import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
+import { isDev, LOCAL_STORAGE_ACCESS_KEY } from "../env";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: `http://localhost:2022/api/trpc`,
+      url: `${isDev ? "http://localhost:2022" : "http://localhost"}/api/trpc`,
     }),
     // adds pretty logs to your console in development and logs errors in production
     loggerLink({
       enabled: (opts) =>
-        process.env.NODE_ENV === "development" ||
-        (opts.direction === "down" && opts.result instanceof Error),
+        isDev || (opts.direction === "down" && opts.result instanceof Error),
     }),
   ],
   headers() {

@@ -5,7 +5,7 @@
   "scripts": {
     "dev:server": "nodemon -e ts -w . -x ts-node ./server/dev",
     "dev:client": "nodemon -e ts -w . -x 'wait-port 2022 && vite'",
-    "start": "run-p dev:* --print-label",
+    "start": "NODE_ENV=development run-p dev:* --print-label",
     "build": "vite build",
     "lint": "eslint src/**/*.ts",
     "test": "vitest"
