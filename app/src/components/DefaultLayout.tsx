@@ -19,6 +19,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
           data-website-id="e7050b8c-eec7-46cc-ae22-1b360e03ddef"
           src="https://umami.sinclair.software/umami.js"
         />
+        <script src="https://unpkg.com/@mux/mux-player"></script>
       </Head>
 
       <div className="fixed min-h-screen min-w-screen -z-10">
