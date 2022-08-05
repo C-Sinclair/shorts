@@ -1,16 +1,32 @@
 import { DefaultLayout } from "~/components/DefaultLayout";
-import { trpc, trpcClient } from "~/utils/trpc";
-import { Component } from "solid-js";
+import { Route, Routes } from "@solidjs/router";
+import { lazy } from "solid-js";
+import { getShortData } from "./pages/v/[path].data";
+import { Toaster } from "solid-toast";
 
-export const App: Component = () => {
+const Home = lazy(() => import("./pages/index"));
+const Short = lazy(() => import("./pages/v/[path]"));
+const Login = lazy(() => import("./pages/login"));
+const Signup = lazy(() => import("./pages/signup"));
+const NotFound = lazy(() => import("./pages/404"));
+const AdminDash = lazy(() => import("./pages/admin/index"));
+const UploadShort = lazy(() => import("./pages/admin/upload"));
+const EditShort = lazy(() => import("./pages/admin/short/[id]"));
+
+export function App() {
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <DefaultLayout>
-          <Component {...pageProps} />
-        </DefaultLayout>
-      </QueryClientProvider>
-      <Toaster position="bottom-center" />
-    </trpc.Provider>
+    <DefaultLayout>
+      <Routes>
+        <Route path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/v/:path" component={Short} data={getShortData} />
+        <Route path="/admin" component={AdminDash} />
+        <Route path="/admin/upload" component={UploadShort} />
+        <Route path="/admin/short/:id" component={EditShort} />
+        <Route path="*" component={NotFound} />
+      </Routes>
+      <Toaster />
+    </DefaultLayout>
   );
-};
+}

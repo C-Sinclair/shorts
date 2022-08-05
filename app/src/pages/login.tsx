@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { Link, useNavigate } from "@solidjs/router";
 import { z } from "zod";
-import { useZorm } from "react-zorm";
 import { trpc } from "~/utils/trpc";
-import { useRouter } from "next/router";
 import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
-import { useQueryClient } from "react-query";
+import { createZodForm } from "~/utils/form";
+
+const login = trpc.user.login.mutate;
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -12,68 +12,68 @@ export const loginSchema = z.object({
 });
 
 export default function Login() {
-  const router = useRouter();
-  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
-  const t = trpc.useMutation(["user.login"]);
-  const zo = useZorm("login", loginSchema, {
-    async onValidSubmit(e) {
-      e.preventDefault();
-      const res = await t.mutateAsync(e.data);
-      if (res.access_token && res.user) {
-        localStorage.setItem(LOCAL_STORAGE_ACCESS_KEY, res.access_token);
-        queryClient.clear();
-        if (res.user?.roles?.includes("admin")) {
-          router.push("/admin");
-        } else if (res.user) {
-          router.push("/");
+  const { form, isSubmitting, errors, isValidating } = createZodForm(
+    loginSchema,
+    {
+      async onSubmit(e) {
+        e.preventDefault();
+        const res = await login(e.data);
+        if (res.access_token && res.user) {
+          localStorage.setItem(LOCAL_STORAGE_ACCESS_KEY, res.access_token);
+          if (res.user?.roles?.includes("admin")) {
+            navigate("/admin");
+          } else if (res.user) {
+            navigate("/");
+          }
         }
-      }
+      },
     },
-  });
+  );
 
   return (
     <>
       <h1>Login</h1>
       <form
-        className="flex flex-col p-20 mx-auto max-w-md bg-black rounded-md"
-        ref={zo.ref}
+        use:form={form}
+        class="flex flex-col p-20 mx-auto max-w-md bg-black rounded-md"
       >
-        <div className="mb-4 w-full">
-          <label htmlFor="email" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="email" class="text-white">
             Email
           </label>
           <input
-            name={zo.fields.email()}
+            name="email"
             type="email"
             id="email"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.email())}
+            class="w-full"
+            aria-invalid={Boolean(errors.email())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="password" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="password" class="text-white">
             Password
           </label>
           <input
-            name={zo.fields.password()}
+            name="password"
             type="password"
             id="password"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.password())}
+            class="w-full"
+            aria-invalid={Boolean(errors.password())}
           />
         </div>
         <button
           type="submit"
-          className="self-end mt-4 text-white"
-          disabled={t.isLoading || zo.validation?.success === true}
+          class="self-end mt-4 text-white"
+          disabled={isSubmitting || isValidating}
         >
           Login
         </button>
-        <p className="text-white">
+        <p class="text-white">
           Already have an account?{" "}
           <Link href="/signup">
-            <a className="text-yellow-500">Sign up</a>
+            <a class="text-yellow-500">Sign up</a>
           </Link>
         </p>
       </form>

@@ -1,9 +1,10 @@
-import Link from "next/link";
+import { Link, useNavigate } from "@solidjs/router";
 import { z } from "zod";
-import { useZorm } from "react-zorm";
 import { trpc } from "~/utils/trpc";
-import { useRouter } from "next/router";
 import { LOCAL_STORAGE_ACCESS_KEY } from "~/env";
+import { createZodForm } from "~/utils/form";
+
+const register = trpc.user.register.mutate;
 
 export const signupSchema = z
   .object({
@@ -17,15 +18,15 @@ export const signupSchema = z
   });
 
 export default function Signup() {
-  const router = useRouter();
-  const t = trpc.useMutation(["user.register"]);
-  const zo = useZorm("signup", signupSchema, {
-    async onValidSubmit(e) {
+  const navigate = useNavigate();
+
+  const { form, isValid, errors } = createZodForm(signupSchema, {
+    async onSubmit(e) {
       e.preventDefault();
-      const res = await t.mutateAsync(e.data);
+      const res = await register(e.data);
       if (res.access_token && res.user) {
         localStorage.setItem(LOCAL_STORAGE_ACCESS_KEY, res.access_token);
-        router.push("/");
+        navigate("/");
       }
     },
   });
@@ -33,52 +34,56 @@ export default function Signup() {
     <>
       <h1>Signup</h1>
       <form
-        className="flex flex-col p-20 mx-auto max-w-md bg-black rounded-md"
-        ref={zo.ref}
+        use:form={form}
+        class="flex flex-col p-20 mx-auto max-w-md bg-black rounded-md"
       >
-        <div className="mb-4 w-full">
-          <label htmlFor="email" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="email" class="text-white">
             Email
           </label>
           <input
-            name={zo.fields.email()}
+            name="email"
             type="email"
             id="email"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.email())}
+            class="w-full"
+            aria-invalid={Boolean(errors.email())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="password" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="password" class="text-white">
             Password
           </label>
           <input
-            name={zo.fields.password()}
+            name="password"
             type="password"
             id="password"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.password())}
+            class="w-full"
+            aria-invalid={Boolean(errors.password())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="confirm_password" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="confirm_password" class="text-white">
             Confirm Password
           </label>
           <input
-            name={zo.fields.confirm_password()}
+            name="confirm_password"
             type="password"
             id="confirm_password"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.confirm_password())}
+            class="w-full"
+            aria-invalid={Boolean(errors.confirm_password())}
           />
         </div>
-        <button type="submit" className="self-end mt-4 text-white">
+        <button
+          type="submit"
+          class="self-end mt-4 text-white"
+          disabled={!isValid}
+        >
           Signup
         </button>
-        <p className="text-white">
+        <p class="text-white">
           Already have an account?{" "}
           <Link href="/login">
-            <a className="text-yellow-500">Login</a>
+            <a class="text-yellow-500">Login</a>
           </Link>
         </p>
       </form>

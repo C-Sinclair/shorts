@@ -1,16 +1,26 @@
-import { useRouter } from "next/router";
-import { useZorm } from "react-zorm";
 import { AdminOnly } from "~/components/AdminOnly";
 import { trpc } from "~/utils/trpc";
 import { z } from "zod";
-import { useQueryClient } from "react-query";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
+import toast from "solid-toast";
+import { useNavigate, useParams } from "@solidjs/router";
+import { createResource, Show } from "solid-js";
+import { createZodForm } from "~/utils/form";
+import { ShortWithViews } from "~/server/routers/short";
+
+const edit = trpc.short.admin.edit.mutate;
 
 export default function EditShort() {
+  const params = useParams();
+  const [short] = createResource(
+    () => params.id,
+    (id) => trpc.short.byId.query({ id }),
+  );
+
   return (
     <AdminOnly>
-      <EditShortForm />
+      <Show when={short()}>
+        <EditShortForm short={short()!} />
+      </Show>
     </AdminOnly>
   );
 }
@@ -24,133 +34,106 @@ export const editShortSchema = z.object({
   previewGifStartTime: z.string().optional(),
 });
 
-function EditShortForm() {
-  const router = useRouter();
-  const id = router.query.id as string;
+function EditShortForm(props: { short: ShortWithViews }) {
+  const navigate = useNavigate();
 
-  const queryClient = useQueryClient();
-
-  const t = trpc.useQuery(["short.byId", { id }]);
-  const m = trpc.useMutation(["short.admin.edit"]);
-
-  const zo = useZorm("edit", editShortSchema, {
-    async onValidSubmit(e) {
+  const { form, errors, isValid } = createZodForm(editShortSchema, {
+    initialValues: props.short,
+    async onSubmit(e) {
       e.preventDefault();
       await toast.promise(
-        m.mutateAsync({
-          id,
+        edit({
+          id: props.short.id as string,
           data: e.data,
         }),
         {
           loading: "Updating...",
-          success: (data) => `Updated short! ID: ${data.id}`,
+          success: `Updated short! ID: ${props.short.id}`,
           error: "Error updating short!",
         },
       );
-      await Promise.all([
-        queryClient.invalidateQueries(["short.all"]),
-        queryClient.invalidateQueries(["short.byId", { id }]),
-      ]);
-      router.push("/admin");
+      navigate("/admin");
     },
   });
 
-  useEffect(
-    function updateFieldsOnDataChange() {
-      if (t.data) {
-        Object.keys(editShortSchema.shape).forEach((field) => {
-          const elem = zo.ref.current?.elements.namedItem(
-            field,
-          ) as HTMLInputElement;
-          if (elem) {
-            elem.value = t.data[field];
-          }
-        });
-      }
-    },
-    [t.data],
-  );
-
   return (
-    <div className="flex flex-col items-center w-full mt-10">
-      <h1 className="text-white text-3xl">Edit short</h1>
-      <form className="flex flex-col p-20 bg-black max-w-md" ref={zo.ref}>
-        <div className="mb-4 w-full">
-          <label htmlFor="title" className="text-white">
+    <div class="flex flex-col items-center w-full mt-10">
+      <h1 class="text-white text-3xl">Edit short</h1>
+      <form class="flex flex-col p-20 bg-black max-w-md" use:form={form}>
+        <div class="mb-4 w-full">
+          <label for="title" class="text-white">
             Title
           </label>
           <input
-            name={zo.fields.title()}
+            name="title"
             id="title"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.title())}
+            class="w-full"
+            aria-invalid={Boolean(errors.title())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="description" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="description" class="text-white">
             Description
           </label>
           <textarea
-            name={zo.fields.description()}
+            name="description"
             id="description"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.description())}
+            class="w-full"
+            aria-invalid={Boolean(errors.description())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="path" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="path" class="text-white">
             Path
           </label>
           <input
-            name={zo.fields.path()}
+            name="path"
             id="path"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.path())}
+            class="w-full"
+            aria-invalid={Boolean(errors.path())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="playbackId" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="playbackId" class="text-white">
             Playback ID
           </label>
           <input
-            name={zo.fields.playbackId()}
+            name="playbackId"
             id="playbackId"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.playbackId())}
+            class="w-full"
+            aria-invalid={Boolean(errors.playbackId())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="thumbnailTime" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="thumbnailTime" class="text-white">
             Thumbnail Time (s)
           </label>
           <input
-            name={zo.fields.thumbnailTime()}
+            name="thumbnailTime"
             id="thumbnailTime"
-            className="w-full"
+            class="w-full"
             type="number"
-            aria-invalid={Boolean(zo.errors.thumbnailTime())}
+            aria-invalid={Boolean(errors.thumbnailTime())}
           />
-          <p className="text-red-50">{zo.errors.thumbnailTime()?.message}</p>
+          <p class="text-red-50">{errors.thumbnailTime()?.message}</p>
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="previewGifStartTime" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="previewGifStartTime" class="text-white">
             Preview Gif Start Time (s)
           </label>
           <input
-            name={zo.fields.previewGifStartTime()}
+            name="previewGifStartTime"
             id="previewGifStartTime"
-            className="w-full"
+            class="w-full"
             type="number"
-            aria-invalid={Boolean(zo.errors.previewGifStartTime())}
+            aria-invalid={Boolean(errors.previewGifStartTime())}
           />
-          <p className="text-red-50">
-            {zo.errors.previewGifStartTime()?.message}
-          </p>
+          <p class="text-red-50">{errors.previewGifStartTime()?.message}</p>
         </div>
         <button
           type="submit"
-          className="self-end mt-4 text-white"
-          disabled={t.isLoading || zo.validation?.success === true}
+          class="self-end mt-4 text-white"
+          disabled={!isValid}
         >
           Submit
         </button>

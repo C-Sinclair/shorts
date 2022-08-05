@@ -1,24 +1,25 @@
 import clsx from "clsx";
-import { useAllShorts } from "~/hooks/all-shorts";
-import { useFocusedShort } from "~/hooks/focused-short";
+import { For } from "solid-js";
+import { allShorts, focusedShortSignal } from "~/hooks/shorts";
 import { ShortItem } from "../components";
 
 export default function Home() {
-  const { shorts } = useAllShorts();
-  const { focusedShort } = useFocusedShort();
+  const [shorts] = allShorts;
+  const [focusedShort] = focusedShortSignal;
   return (
-    <ul className="flex flex-wrap px-12 pt-12">
-      {shorts?.map((short) => (
-        <li
-          key={short.id}
-          className={clsx("my-8 transition-all", {
-            "opacity-0 translate-y-4": focusedShort &&
-              focusedShort.id !== short.id,
-          })}
-        >
-          <ShortItem {...short} />
-        </li>
-      ))}
+    <ul class="flex flex-wrap px-12 pt-12">
+      <For each={shorts()}>
+        {(short) => (
+          <li
+            class={clsx("my-8 transition-all", {
+              "opacity-0 translate-y-4": focusedShort() &&
+                focusedShort()?.id !== short.id,
+            })}
+          >
+            <ShortItem short={short} />
+          </li>
+        )}
+      </For>
     </ul>
   );
 }

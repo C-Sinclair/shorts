@@ -1,41 +1,20 @@
-import Head from "next/head";
-import { ReactNode } from "react";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { children, ParentProps } from "solid-js";
 import { Header } from "./Header";
 
-type DefaultLayoutProps = {
-  children: ReactNode;
-};
-
-export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
+export const DefaultLayout = (props: ParentProps) => {
+  const c = children(() => props.children);
   return (
     <>
-      <Head>
-        <title>Shorts</title>
-        <link rel="icon" href="/shorts-fav.png" />
-        <script
-          async
-          defer
-          data-website-id="e7050b8c-eec7-46cc-ae22-1b360e03ddef"
-          src="https://umami.sinclair.software/umami.js"
-        />
-        <script src="https://unpkg.com/@mux/mux-player"></script>
-      </Head>
-
-      <div className="fixed min-h-screen min-w-screen -z-10">
+      <div class="fixed min-h-screen min-w-screen -z-10">
         <img
           alt="background code image"
           src="/mitchell-luo-FWoq_ldWlNQ-unsplash.jpg"
-          className="object-cover fixed w-full h-full opacity-50"
+          class="object-cover fixed w-full h-full opacity-50"
         />
       </div>
 
       <Header />
-      <main className="flex-grow space-y-2 w-full z-5">{children}</main>
-
-      {process.env.NODE_ENV !== "production" && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
+      <main class="flex-grow space-y-2 w-full z-5">{c()}</main>
     </>
   );
 };

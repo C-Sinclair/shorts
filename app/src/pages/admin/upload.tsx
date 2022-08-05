@@ -1,7 +1,7 @@
-import toast from "react-hot-toast";
-import { useZorm } from "react-zorm";
+import toast from "solid-toast";
 import { z } from "zod";
 import { AdminOnly } from "~/components/AdminOnly";
+import { createZodForm } from "~/utils/form";
 import { trpc } from "~/utils/trpc";
 
 export default function Upload() {
@@ -12,6 +12,8 @@ export default function Upload() {
   );
 }
 
+const add = trpc.short.admin.add.mutate;
+
 export const uploadSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1).max(32),
@@ -21,11 +23,10 @@ export const uploadSchema = z.object({
 });
 
 function UploadForm() {
-  const t = trpc.useMutation(["short.admin.add"]);
-  const zo = useZorm("upload", uploadSchema, {
-    async onValidSubmit(e) {
+  const { form, errors, isValid } = createZodForm(uploadSchema, {
+    async onSubmit(e) {
       e.preventDefault();
-      await toast.promise(t.mutateAsync(e.data), {
+      await toast.promise(add(e.data), {
         loading: "Uploading...",
         success: (data) => `Uploaded new short! ID: ${data.id}`,
         error: "Error uploading short!",
@@ -33,59 +34,57 @@ function UploadForm() {
     },
   });
   return (
-    <div className="mt-10 flex flex-col items-center w-full">
-      <h1 className="text-3xl font-bold text-left text-white">
-        Upload a short
-      </h1>
-      <form className="flex flex-col p-20 bg-black h-fit" ref={zo.ref}>
-        <div className="mb-4 w-full">
-          <label htmlFor="title" className="text-white">
+    <div class="mt-10 flex flex-col items-center w-full">
+      <h1 class="text-3xl font-bold text-left text-white">Upload a short</h1>
+      <form class="flex flex-col p-20 bg-black h-fit" use:form={form}>
+        <div class="mb-4 w-full">
+          <label for="title" class="text-white">
             Title
           </label>
           <input
-            name={zo.fields.title()}
+            name="title"
             id="title"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.title())}
+            class="w-full"
+            aria-invalid={Boolean(errors.title())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="description" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="description" class="text-white">
             Description
           </label>
           <textarea
-            name={zo.fields.description()}
+            name="description"
             id="description"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.description())}
+            class="w-full"
+            aria-invalid={Boolean(errors.description())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="path" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="path" class="text-white">
             Path
           </label>
           <input
-            name={zo.fields.path()}
+            name="path"
             id="path"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.path())}
+            class="w-full"
+            aria-invalid={Boolean(errors.path())}
           />
         </div>
-        <div className="mb-4 w-full">
-          <label htmlFor="playbackId" className="text-white">
+        <div class="mb-4 w-full">
+          <label for="playbackId" class="text-white">
             Playback ID
           </label>
           <input
-            name={zo.fields.playbackId()}
+            name="playbackId"
             id="playbackId"
-            className="w-full"
-            aria-invalid={Boolean(zo.errors.playbackId())}
+            class="w-full"
+            aria-invalid={Boolean(errors.playbackId())}
           />
         </div>
         <button
           type="submit"
-          className="self-end mt-4 text-white"
-          disabled={t.isLoading || zo.validation?.success === true}
+          class="self-end mt-4 text-white"
+          disabled={!isValid}
         >
           Submit
         </button>
