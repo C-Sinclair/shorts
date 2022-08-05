@@ -1,5 +1,29 @@
-@shorts/app:build: cache hit, replaying output [2m0cb3fb3ce9cd4e2f[0m
+[35m@shorts/app:build[0m: cache hit, replaying output [2m85945e59bfdb1fcf[0m
 [35m@shorts/app:build: [0m
 [35m@shorts/app:build: [0m> @shorts/app@0.1.0 build /home/conor/Repos/C-Sinclair/shorts.sinclair.software/app
-[35m@shorts/app:build: [0m> pnpm prisma:generate && next build
+[35m@shorts/app:build: [0m> vite build
 [35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0mvite v3.0.4 building for production...
+[35m@shorts/app:build: [0mtransforming...
+[35m@shorts/app:build: [0m✓ 193 modules transformed.
+[35m@shorts/app:build: [0mrendering chunks...
+[35m@shorts/app:build: [0mdist/index.html                     0.77 KiB
+[35m@shorts/app:build: [0mdist/assets/index.2f27cf52.js       1.90 KiB / gzip: 0.98 KiB
+[35m@shorts/app:build: [0mdist/assets/shorts.2b49c33d.js      0.12 KiB / gzip: 0.12 KiB
+[35m@shorts/app:build: [0mdist/assets/_path_.b1cd0ae5.js      1.60 KiB / gzip: 0.86 KiB
+[35m@shorts/app:build: [0mdist/assets/404.07f2f723.js         0.19 KiB / gzip: 0.17 KiB
+[35m@shorts/app:build: [0mdist/assets/login.91b07240.js       1.54 KiB / gzip: 0.82 KiB
+[35m@shorts/app:build: [0mdist/assets/signup.3185f27d.js      1.90 KiB / gzip: 0.89 KiB
+[35m@shorts/app:build: [0mdist/assets/AdminOnly.e3d3c6e9.js   0.36 KiB / gzip: 0.22 KiB
+[35m@shorts/app:build: [0mdist/assets/index.8d4d7689.js       1.63 KiB / gzip: 0.80 KiB
+[35m@shorts/app:build: [0mdist/assets/upload.a7606396.js      2.07 KiB / gzip: 0.90 KiB
+[35m@shorts/app:build: [0mdist/assets/index.a7029217.css      1.10 KiB / gzip: 0.55 KiB
+[35m@shorts/app:build: [0mdist/assets/_id_.f1ca635b.js        3.14 KiB / gzip: 1.19 KiB
+[35m@shorts/app:build: [0mdist/assets/index.7c066da1.js       65.08 KiB / gzip: 18.48 KiB
+[35m@shorts/app:build: [0mdist/assets/index.ee3ec41d.js       65.30 KiB / gzip: 22.85 KiB
+[35m@shorts/app:build: [0mdist/assets/index.dc90f937.js       594.91 KiB / gzip: 170.72 KiB
+[35m@shorts/app:build: [0m
+[35m@shorts/app:build: [0m(!) Some chunks are larger than 500 KiB after minification. Consider:
+[35m@shorts/app:build: [0m- Using dynamic import() to code-split the application
+[35m@shorts/app:build: [0m- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/guide/en/#outputmanualchunks
+[35m@shorts/app:build: [0m- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

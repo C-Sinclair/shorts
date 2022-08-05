@@ -1,5 +1,5 @@
 import multiparty from "multiparty";
-import { upload } from "../../server/mux";
+import { upload } from "../server/mux";
 import { createReadStream } from "fs";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
