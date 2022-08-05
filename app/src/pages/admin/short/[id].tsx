@@ -1,11 +1,11 @@
 import { AdminOnly } from "../../../components/AdminOnly";
 import { trpc } from "../../../utils/trpc";
-import { z } from "zod";
 import toast from "solid-toast";
 import { useNavigate, useParams } from "@solidjs/router";
 import { createResource, Show } from "solid-js";
 import { createZodForm } from "../../../utils/form";
 import { ShortWithViews } from "../../../server/routers/short";
+import { editShortSchema } from "./[id].schema";
 
 const edit = trpc.short.admin.edit.mutate;
 
@@ -24,15 +24,6 @@ export default function EditShort() {
     </AdminOnly>
   );
 }
-
-export const editShortSchema = z.object({
-  title: z.string().min(1).max(32).optional(),
-  description: z.string().min(1).max(256).optional(),
-  path: z.string().min(3),
-  playbackId: z.string(),
-  thumbnailTime: z.string().optional(),
-  previewGifStartTime: z.string().optional(),
-});
 
 function EditShortForm(props: { short: ShortWithViews }) {
   const navigate = useNavigate();

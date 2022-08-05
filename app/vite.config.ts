@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
 import windiPlugin from "vite-plugin-windicss";
@@ -16,5 +18,8 @@ export default defineConfig({
   },
   build: {
     target: "esnext",
+  },
+  define: {
+    "process.env": {},
   },
 });

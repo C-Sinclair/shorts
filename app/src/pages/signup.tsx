@@ -1,21 +1,10 @@
 import { Link, useNavigate } from "@solidjs/router";
-import { z } from "zod";
 import { trpc } from "../utils/trpc";
 import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
 import { createZodForm } from "../utils/form";
+import { signupSchema } from "./signup.schema";
 
 const register = trpc.user.register.mutate;
-
-export const signupSchema = z
-  .object({
-    email: z.string().email(),
-    password: z.string(),
-    confirm_password: z.string(),
-  })
-  .refine((data) => data.password === data.confirm_password, {
-    message: "Passwords don't match",
-    path: ["confirm_password"],
-  });
 
 export default function Signup() {
   const navigate = useNavigate();

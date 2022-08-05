@@ -1,8 +1,8 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { Short } from "../../hooks/shorts";
-import { editShortSchema } from "../../pages/admin/short/[id]";
-import { uploadSchema } from "../../pages/admin/upload";
+import { editShortSchema } from "../../pages/admin/short/[id].schema";
+import { uploadSchema } from "../../pages/admin/upload.schema";
 import { t } from "../context";
 import { adminOnly } from "./middleware";
 

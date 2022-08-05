@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
-import { loginSchema } from "../../pages/login";
-import { signupSchema } from "../../pages/signup";
+import { loginSchema } from "../../pages/login.schema";
+import { signupSchema } from "../../pages/signup.schema";
 import { t } from "../context";
 
 export const userRouter = t.router({

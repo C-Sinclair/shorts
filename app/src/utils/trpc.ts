@@ -4,7 +4,6 @@ import {
   HTTPHeaders,
   httpLink,
 } from "@trpc/client";
-import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import type { AppRouter } from "../server/routers/_app";
 import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
@@ -12,16 +11,13 @@ import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
 const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: `http://localhost:2022`,
+      url: `http://localhost:2022/api/trpc`,
     }),
     // adds pretty logs to your console in development and logs errors in production
     loggerLink({
       enabled: (opts) =>
         process.env.NODE_ENV === "development" ||
         (opts.direction === "down" && opts.result instanceof Error),
-    }),
-    httpBatchLink({
-      url: `/api/trpc`,
     }),
   ],
   headers() {
@@ -31,4 +27,5 @@ const client = createTRPCClient<AppRouter>({
     return { Authorization } as HTTPHeaders;
   },
 });
+
 export const trpc = createTRPCClientProxy(client);

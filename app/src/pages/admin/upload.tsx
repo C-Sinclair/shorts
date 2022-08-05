@@ -1,8 +1,8 @@
 import toast from "solid-toast";
-import { z } from "zod";
 import { AdminOnly } from "../../components/AdminOnly";
 import { createZodForm } from "../../utils/form";
 import { trpc } from "../../utils/trpc";
+import { uploadSchema } from "./upload.schema";
 
 export default function Upload() {
   return (
@@ -13,14 +13,6 @@ export default function Upload() {
 }
 
 const add = trpc.short.admin.add.mutate;
-
-export const uploadSchema = z.object({
-  id: z.string().optional(),
-  title: z.string().min(1).max(32),
-  description: z.string().min(1).max(256),
-  path: z.string().min(3),
-  playbackId: z.string(),
-});
 
 function UploadForm() {
   const { form, errors, isValid } = createZodForm(uploadSchema, {

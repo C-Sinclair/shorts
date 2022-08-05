@@ -1,15 +1,10 @@
 import { Link, useNavigate } from "@solidjs/router";
-import { z } from "zod";
 import { trpc } from "../utils/trpc";
 import { LOCAL_STORAGE_ACCESS_KEY } from "../env";
 import { createZodForm } from "../utils/form";
+import { loginSchema } from "./login.schema";
 
 const login = trpc.user.login.mutate;
-
-export const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6).max(42),
-});
 
 export default function Login() {
   const navigate = useNavigate();
