@@ -58,7 +58,7 @@
     "react-hot-toast": "^2.3.0",
     "react-query": "^3.27.0",
     "react-zorm": "^0.3.1",
-    "start-server-and-test": "^1.12.0",
+    "start-server-and-test": "^2.0.0",
     "superjson": "^1.7.4",
     "zod": "^3.14.4"
   },
